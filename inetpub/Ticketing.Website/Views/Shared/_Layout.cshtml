@@ -6,11 +6,31 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-    @RenderBody()
+   <div class="page">
+        <div id="header">
+            <div id="title">
+                <h1>Management Tool Project</h1>
+            </div>
+            <div id="logindisplay">
+                @if (Request.IsAuthenticated) {
+                    @Html.ActionLink("Log Off", "Logout", "Account")
+                } else {
+                    @Html.ActionLink("Login", "Login", "Account")
+                }
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+            
+            @RenderSection("scripts", required: false)
+        </div>
+        <div id="footer">
+        </div>
+        @Scripts.Render("~/bundles/custom")
+    </div>
 </body>
 </html>
