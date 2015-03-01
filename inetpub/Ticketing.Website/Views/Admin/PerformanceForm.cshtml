@@ -1,0 +1,62 @@
+﻿@model Ticketing.Framework.Models.Ticket.PerformanceVM
+@{
+    var actionName = (string)ViewBag.PageTitle.Replace(" ", "");
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.PageTitle</h1>
+</hgroup>
+
+@using (Html.BeginForm(@actionName, "Admin", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Create/Edit Performance</legend>
+        @Html.ValidationMessage("ErrorMessage")
+        <div class="editor-label">
+            @Html.LabelFor(l => l.PerformanceDate, "Performance Date")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(l => l.PerformanceDate, new { required = "" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(l => l.AvailableTickets, "Available Seats")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(l => l.AvailableTickets, new { required = "" })
+        </div>            
+        <div class="editor-label">
+            @Html.LabelFor(l => l.Price, "Price")
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(l => l.Price, new { required = "" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(l => l.Cancelled, "Cancelled")
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(l => l.Cancelled)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(l => l.EventId, "Associated Event")
+        </div>
+        <div class="editor-field">
+            @Html.PasswordFor(l => l.EventId, new { required = "" })
+        </div>
+
+        <p>
+            <input type="submit" value="submit" />
+            @Html.ActionLink("Cancel", "Index", new { controller = "Account" })
+        </p>
+
+    </fieldset>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PerformanceDate').Zebra_DatePicker({
+            direction: true,
+            format: 'm/d/Y',
+            show_icon: false
+        });
+    });
+</script>

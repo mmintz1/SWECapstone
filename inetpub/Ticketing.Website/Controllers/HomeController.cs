@@ -10,6 +10,11 @@ namespace Ticketing.Website.Controllers
     {
         public ActionResult Index()
         {
+            return View("~/Views/Home/Index.cshtml");
+        }
+
+        public ActionResult About()
+        {
             return View();
         }
 

@@ -1,6 +1,80 @@
-﻿@{
+﻿@model Ticketing.Framework.Models.Cart.PaymentVM
+@using Ticketing.Framework.BusinessModels;
+@{
     ViewBag.Title = "Review";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    if (Model.BillingAddress == null)
+    {
+        Model.BillingAddress = new Address();
+    }
+    
+    if (Model.ShippingAddress == null)
+    {
+        Model.ShippingAddress = new Address();   
+    }
+
+    
 }
 
 <h2>Review</h2>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "management-form" }))
+{
+    <div>
+        <fieldset>
+            <legend>Account Information</legend>
+            @Html.ValidationMessage("ErrorMessage")
+            <div class="editor-label">
+                @Html.LabelFor(l => l.FirstName, "First Name")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.FirstName, new { required = "" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(l => l.LastName, "Last Name")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.LastName, new { required = "" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(l => l.Email, "Email")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.Email, new { required = "", type = "email" })
+            </div>
+
+            @Html.Partial("~/Views/Shared/Address.cshtml", Model.BillingAddress)
+            @Html.Partial("~/Views/Shared/Address.cshtml", Model.ShippingAddress)
+
+            <div class="editor-label">
+                @Html.LabelFor(l => l.CreditCardType, "Card Type")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.CreditCardType, new { required = "" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(l => l.CreditCardNumber, "Card Number")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(l => l.CVV, "Security Code")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.CVV, new { required = "" })
+            </div>
+            <div class="editor-label">
+                @Html.LabelFor(l => l.NameOnCard, "First Name")
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(l => l.NameOnCard, new { required = "" })
+            </div>
+            
+            <p>
+                <input type="submit" value="submit" />
+            </p>
+        </fieldset>
+    </div>
+}

@@ -9,28 +9,41 @@
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>
-   <div class="page">
-        <div id="header">
-            <div id="title">
-                <h1>Management Tool Project</h1>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
             </div>
-            <div id="logindisplay">
-                @if (Request.IsAuthenticated) {
-                    @Html.ActionLink("Log Off", "Logout", "Account")
-                } else {
-                    @Html.ActionLink("Login", "Login", "Account")
-                }
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Buy Tickets", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Events", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Abount", "About", "Home")</li>
+                        <li>@Html.ActionLink("Cart", "Index", "Home")</li>
+                    </ul>
+                </nav>
             </div>
         </div>
-        <div id="main">
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
             @RenderBody()
-
-            
-            @RenderSection("scripts", required: false)
-        </div>
-        <div id="footer">
-        </div>
+        </section>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>@DateTime.Now.Year - Ticketing Website</p>
+                </div>
+            </div>
+        </footer>
         @Scripts.Render("~/bundles/custom")
+        @RenderSection("scripts", required: false)
     </div>
 </body>
 </html>
