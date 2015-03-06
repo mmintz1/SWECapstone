@@ -1,6 +1,56 @@
-﻿@{
+﻿@model List<Ticketing.Framework.Models.Ticket.PerformanceVM>
+@{
     ViewBag.Title = "PerformanceList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PerformanceList</h2>
+<hgroup class="title">
+    <h1>Performance List</h1>
+</hgroup>
+
+
+<table>
+    <tr>
+        <th>
+            Event Name
+        </th>
+        <th>
+            Event Date
+        </th>
+        <th>
+            Seats Available
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            Test
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PerformanceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableTickets)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @*@Html.ActionLink("Edit", "EditProject", new { controller = "Project", id = item.Id }) |
+            @Html.ActionLink("Details", "ProjectDetails", new { controller = "Project", id = item.Id }) |
+            @Html.ActionLink("View Tasks", "Index", new { controller = "Task", id = item.Id }) |
+            @Html.ActionLink("View Requirements", "Index", new { controller = "Requirement", id = item.Id }) |
+            @Html.ActionLink("View Risks", "Index", new { controller = "Risk", id = item.Id }) |
+            @Html.ActionLink("View Hours Report", "Report", new { controller = "Project", id = item.Id })*@
+        </td>
+    </tr>
+}
+
+</table>

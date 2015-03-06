@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BusinessModels\Address.cs" />
     <Compile Include="Mediators\AccountMediator.cs" />
+    <Compile Include="Mediators\TicketMediator.cs" />
     <Compile Include="Models\Account\RegisterVM.cs" />
     <Compile Include="Models\Cart\PaymentVM.cs" />
     <Compile Include="Models\Ticket\EventVM.cs" />

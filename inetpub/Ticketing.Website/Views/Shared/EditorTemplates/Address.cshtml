@@ -3,8 +3,6 @@
     ViewBag.Title = "Address";
 }
 
-<h2>Address</h2>
-
 <div class="editor-label">
     @Html.LabelFor(l => l.Address1, "Address")
 </div>
@@ -33,5 +31,5 @@
     @Html.LabelFor(l => l.Zip, "Zip")
 </div>
 <div class="editor-field">
-    @Html.TextBoxFor(l => l.Zip, new { required = "" })
+    @Html.TextBoxFor(l => l.Zip, new { required = "", @maxlength = 5, @type = "number" })
 </div>

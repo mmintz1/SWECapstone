@@ -230,7 +230,7 @@
     <Content Include="Views\Admin\PerformanceList.cshtml" />
     <Content Include="Views\Admin\PerformanceForm.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Address.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Admin\EventForm.cshtml" />
