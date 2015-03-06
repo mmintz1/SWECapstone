@@ -1,4 +1,8 @@
 ﻿<ul>
     <li><a href="/register">Register</a></li>
+    @if (User.Identity.IsAuthenticated){
+        <li>@Html.ActionLink("Log Off", "Logout", "Account")</li>
+    } else {
     <li><a href="/login">Login</a></li>
+    }
 </ul>

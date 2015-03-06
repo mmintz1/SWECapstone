@@ -41,7 +41,7 @@ namespace Ticketing.Website.Controllers
 
                 //Session["UserAccount"] = mediator.GetUser(user.Email);
 
-                return Redirect("~/project/index");
+                return Redirect("~/");
             }
             else
             {

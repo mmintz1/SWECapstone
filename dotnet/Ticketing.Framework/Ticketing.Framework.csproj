@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,6 +47,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessModels\Address.cs" />
+    <Compile Include="DBModels\CardType.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\Event.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\EventType.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\Order.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\Performance.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\TicketMaster.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketMaster.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\TicketMaster.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\TicketMaster.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketMaster.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBModels\User.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="Mediators\AccountMediator.cs" />
     <Compile Include="Mediators\TicketMediator.cs" />
     <Compile Include="Models\Account\RegisterVM.cs" />
@@ -49,7 +89,32 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformers\AccountTransformer.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EntityDeploy Include="DBModels\TicketMaster.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TicketMaster.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="DBModels\TicketMaster.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TicketMaster.edmx</DependentUpon>
+      <LastGenOutput>TicketMaster.Context.cs</LastGenOutput>
+    </None>
+    <None Include="DBModels\TicketMaster.edmx.diagram">
+      <DependentUpon>TicketMaster.edmx</DependentUpon>
+    </None>
+    <None Include="DBModels\TicketMaster.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TicketMaster.edmx</DependentUpon>
+      <LastGenOutput>TicketMaster.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
