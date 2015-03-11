@@ -14,5 +14,6 @@ namespace Ticketing.Framework.Models.Ticket
         public string Category { get; set; }
         public string Image { get; set; }
         public List<PerformanceVM> Performances { get; set; }
+        public int Id { get; set; }
     }
 }

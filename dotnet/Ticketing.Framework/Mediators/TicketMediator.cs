@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ticketing.Framework.Data;
+using Ticketing.Framework.DBModels;
 using Ticketing.Framework.Models.Ticket;
 
 namespace Ticketing.Framework.Mediators
@@ -26,24 +28,20 @@ namespace Ticketing.Framework.Mediators
         public bool CreateEvent(EventVM model)
         {
             var success = false;
-            //using (var db = new ManagementToolEntities())
-            //{
-            //    var resp = new ProjectRepository(db);
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var eventModel = new Event
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Location = model.Location,
+                    Image = model.Image,
+                    status = 0
+                };
 
-            //    var project = new Project
-            //    {
-            //        Title = model.Title,
-            //        Description = model.Description,
-            //        ProjectManager = model.Manager,
-            //        Status = model.Status.ToString(),
-            //        DueDate = DateTime.Parse(model.DueDate),
-            //        CompanyId = model.CompanyId,
-            //        TeamMembers = string.Join(";", model.ProjectEmployees)
-            //    };
-
-            //    resp.Insert(project);
-            //    success = db.SaveChanges() > 0;
-            //}
+                db.Events.Add(eventModel);
+                success = db.SaveChanges() > 0;
+            }
 
             return success;
         }
@@ -51,20 +49,19 @@ namespace Ticketing.Framework.Mediators
         public bool UpdateEvent(EventVM model)
         {
             var success = false;
-            //using (var db = new ManagementToolEntities())
-            //{
-            //    var resp = new ProjectRepository(db);
-            //    Project dbProject = resp.GetFirstOrDefault(p => p.ProjectID == model.Id);
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new EventRepository(db);
+                Event dbEvent = db.Events.FirstOrDefault(e => e.EventId == model.Id);
 
-            //    dbProject.Description = model.Description;
-            //    dbProject.DueDate = DateTime.Parse(model.DueDate);
-            //    dbProject.ProjectManager = model.Manager;
-            //    dbProject.Status = model.Status.ToString();
-            //    dbProject.Title = model.Title;
+                dbEvent.Description = model.Description;
+                dbEvent.Image = model.Image;
+                dbEvent.Location = model.Location;
+                dbEvent.Name = model.Name;
 
-            //    resp.Update(dbProject);
-            //    success = db.SaveChanges() > 0;
-            //}
+                resp.Update(dbEvent);
+                success = db.SaveChanges() > 0;
+            }
 
             return success;
         }
@@ -86,24 +83,22 @@ namespace Ticketing.Framework.Mediators
         public bool CreatePerformance(PerformanceVM model)
         {
             var success = false;
-            //using (var db = new ManagementToolEntities())
-            //{
-            //    var resp = new ProjectRepository(db);
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
 
-            //    var project = new Project
-            //    {
-            //        Title = model.Title,
-            //        Description = model.Description,
-            //        ProjectManager = model.Manager,
-            //        Status = model.Status.ToString(),
-            //        DueDate = DateTime.Parse(model.DueDate),
-            //        CompanyId = model.CompanyId,
-            //        TeamMembers = string.Join(";", model.ProjectEmployees)
-            //    };
+                var perf = new Performance
+                {
+                    Date = model.PerformanceDate,
+                    EventId = model.EventId,
+                    Price = model.Price,
+                    status = model.Cancelled,
+                    TotalTickets = model.AvailableTickets
+                };
 
-            //    resp.Insert(project);
-            //    success = db.SaveChanges() > 0;
-            //}
+                resp.Insert(perf);
+                success = db.SaveChanges() > 0;
+            }
 
             return success;
         }
@@ -111,20 +106,20 @@ namespace Ticketing.Framework.Mediators
         public bool UpdatePerformance(PerformanceVM model)
         {
             var success = false;
-            //using (var db = new ManagementToolEntities())
-            //{
-            //    var resp = new ProjectRepository(db);
-            //    Project dbProject = resp.GetFirstOrDefault(p => p.ProjectID == model.Id);
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
+                Performance perf = resp.GetFirstOrDefault(p => p.PerformanceId == model.Id);
 
-            //    dbProject.Description = model.Description;
-            //    dbProject.DueDate = DateTime.Parse(model.DueDate);
-            //    dbProject.ProjectManager = model.Manager;
-            //    dbProject.Status = model.Status.ToString();
-            //    dbProject.Title = model.Title;
+                perf.Date = model.PerformanceDate;
+                perf.Price = model.Price;
+                perf.status = model.Cancelled;
+                perf.TotalTickets = model.AvailableTickets;
+                perf.EventId = model.EventId;
 
-            //    resp.Update(dbProject);
-            //    success = db.SaveChanges() > 0;
-            //}
+                resp.Update(perf);
+                success = db.SaveChanges() > 0;
+            }
 
             return success;
         }
