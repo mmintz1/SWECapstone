@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Ticketing.Framework.Data;
 using Ticketing.Framework.DBModels;
+using Ticketing.Framework.Models.Common;
 using Ticketing.Framework.Models.Ticket;
+using Ticketing.Framework.Transformers;
 
 namespace Ticketing.Framework.Mediators
 {
@@ -21,7 +23,14 @@ namespace Ticketing.Framework.Mediators
         public EventVM GetEvent(int id)
         {
             var ev = new EventVM();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new EventRepository(db);
+                Event dbEvent = db.Events.FirstOrDefault(e => e.EventId == id);
 
+                var transformer = new EventTransformer();
+                ev = transformer.Transform(dbEvent);
+            }
             return ev;
         }
 
@@ -36,7 +45,8 @@ namespace Ticketing.Framework.Mediators
                     Description = model.Description,
                     Location = model.Location,
                     Image = model.Image,
-                    status = 0
+                    status = 0,
+                    EventTypeId = Convert.ToInt32(model.Category)
                 };
 
                 db.Events.Add(eventModel);
@@ -76,6 +86,11 @@ namespace Ticketing.Framework.Mediators
         public PerformanceVM GetPerformance(int id)
         {
             var perf = new PerformanceVM();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
+                resp.Get(p => p.Date > DateTime.Now && p.TotalTickets > 0);
+            }
 
             return perf;
         }
@@ -122,6 +137,21 @@ namespace Ticketing.Framework.Mediators
             }
 
             return success;
+        }
+
+        public List<Category> GetEventTypes()
+        {
+            var eventTypes = new List<Category>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new EventTypeRepository(db);
+                var types = resp.GetAll().ToList();
+
+                var transformer = new CategoryTransformer();
+                eventTypes = transformer.Transform(types);
+            }
+
+            return eventTypes;
         }
     }
 }

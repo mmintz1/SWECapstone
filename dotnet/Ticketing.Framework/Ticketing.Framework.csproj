@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BusinessModels\Address.cs" />
     <Compile Include="Data\EventRepository.cs" />
+    <Compile Include="Data\EventTypeRepository.cs" />
     <Compile Include="Data\GenericRepository.cs" />
     <Compile Include="Data\PerformanceRepository.cs" />
     <Compile Include="DBModels\CardType.cs">
@@ -93,10 +94,14 @@
     <Compile Include="Mediators\TicketMediator.cs" />
     <Compile Include="Models\Account\RegisterVM.cs" />
     <Compile Include="Models\Cart\PaymentVM.cs" />
+    <Compile Include="Models\Common\Category.cs" />
     <Compile Include="Models\Ticket\EventVM.cs" />
     <Compile Include="Models\Ticket\PerformanceVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transformers\AccountTransformer.cs" />
+    <Compile Include="Transformers\CategoryTransformer.cs" />
+    <Compile Include="Transformers\EventTransformer.cs" />
+    <Compile Include="Transformers\PerformanceTransformer.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DBModels\TicketMaster.edmx">

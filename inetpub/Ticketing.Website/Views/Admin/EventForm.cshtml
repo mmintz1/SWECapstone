@@ -28,7 +28,7 @@
             @Html.LabelFor(l => l.Image, "Image")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.Image, new { required = "" })
+            @Html.TextBoxFor(l => l.Image)
         </div>
         <div class="editor-label">
             @Html.LabelFor(l => l.Description, "Description")
@@ -40,7 +40,7 @@
             @Html.LabelFor(l => l.Category, "Category")
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(l => l.Category, new { required = "" })
+            @Html.DropDownListFor(l => l.Category, new SelectList(Model.Categories, "Id", "Name"), new { required = "" })
         </div>
 
         <p>

@@ -11,10 +11,11 @@ namespace Ticketing.Website.Controllers
     public class AdminController : Controller
     {
         [HttpGet]
-        public ActionResult EditEvent()
+        public ActionResult EditEvent(int id)
         {
             var mediator = new TicketMediator();
-            var model =  mediator.GetEvent(0);
+            var model =  mediator.GetEvent(id);
+            model.Categories = mediator.GetEventTypes();
             
             ViewBag.PageTitle = "Edit Event";
             return View("~/Views/Admin/EventForm.cshtml", model);
@@ -41,6 +42,9 @@ namespace Ticketing.Website.Controllers
         {
             var model = new EventVM();
             ViewBag.PageTitle = "Create Event";
+
+            var mediator = new TicketMediator();
+            model.Categories = mediator.GetEventTypes();
             return View("~/Views/Admin/EventForm.cshtml", model);
         }
 

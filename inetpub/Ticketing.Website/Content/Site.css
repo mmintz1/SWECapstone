@@ -526,10 +526,10 @@ table {
 }
 
 th {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     text-align: left;
-    border: none 0px;
-    padding-left: 0;
+    border: 1px solid #000000;
+    padding: 6px 5px;
 }
 
 th a {
