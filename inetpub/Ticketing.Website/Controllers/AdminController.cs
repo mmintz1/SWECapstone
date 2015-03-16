@@ -38,6 +38,15 @@ namespace Ticketing.Website.Controllers
         }
 
         [HttpGet]
+        public ActionResult EventList()
+        {
+            var mediator = new TicketMediator();
+            var model = mediator.GetEvents();
+
+            return View("~/Views/Admin/EventList.cshtml", model);
+        }
+
+        [HttpGet]
         public ActionResult CreateEvent()
         {
             var model = new EventVM();
@@ -90,9 +99,10 @@ namespace Ticketing.Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult CreatePerformance()
+        public ActionResult CreatePerformance(int id)
         {
             var model = new PerformanceVM();
+            model.EventId = id;
             ViewBag.PageTitle = "Create Performance";
             return View("~/Views/Admin/PerformanceForm.cshtml", model);
         }
@@ -101,6 +111,7 @@ namespace Ticketing.Website.Controllers
         public ActionResult CreatePerformance(PerformanceVM model)
         {
             var mediator = new TicketMediator();
+            model.Id = 0;
             var success = mediator.CreatePerformance(model);
 
             if (success)
@@ -114,10 +125,12 @@ namespace Ticketing.Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult PerformanceList()
+        public ActionResult PerformanceList(int id)
         {
             var mediator = new TicketMediator();
-            var model = mediator.GetPerformances();
+            var model = mediator.GetEvent(id);
+            model.Performances = new List<PerformanceVM>();
+            model.Performances = mediator.GetPerformances(id);
 
             return View("~/Views/Admin/PerformanceList.cshtml", model);
         }

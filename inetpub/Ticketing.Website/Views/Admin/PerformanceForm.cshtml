@@ -36,16 +36,16 @@
         <div class="editor-field">
             @Html.CheckBoxFor(l => l.Cancelled)
         </div>
-        <div class="editor-label">
+        @*<div class="editor-label">
             @Html.LabelFor(l => l.EventId, "Associated Event")
         </div>
         <div class="editor-field">
             @Html.PasswordFor(l => l.EventId, new { required = "" })
-        </div>
-
+        </div>*@
+        @Html.HiddenFor(l => l.EventId)
         <p>
             <input type="submit" value="submit" />
-            @Html.ActionLink("Cancel", "Index", new { controller = "Account" })
+            @Html.ActionLink("Cancel", "EventList", new { controller = "Admin" })
         </p>
 
     </fieldset>

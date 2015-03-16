@@ -16,6 +16,14 @@ namespace Ticketing.Framework.Mediators
         public List<EventVM> GetEvents()
         {
             var events = new List<EventVM>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new EventRepository(db);
+                IEnumerable<Event> dbEvents = resp.GetAll();
+
+                var transformer = new EventTransformer();
+                events = transformer.Transform(dbEvents);
+            }
 
             return events;
         }
@@ -46,7 +54,7 @@ namespace Ticketing.Framework.Mediators
                     Location = model.Location,
                     Image = model.Image,
                     status = 0,
-                    EventTypeId = Convert.ToInt32(model.Category)
+                    EventTypeId = model.Category
                 };
 
                 db.Events.Add(eventModel);
@@ -76,10 +84,17 @@ namespace Ticketing.Framework.Mediators
             return success;
         }
 
-        public List<PerformanceVM> GetPerformances()
+        public List<PerformanceVM> GetPerformances(int id)
         {
             var performances = new List<PerformanceVM>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
+                var perfs = resp.Get(p => p.EventId == id);
 
+                var transformer = new PerformanceTransformer();
+                performances = transformer.Transform(perfs);
+            }
             return performances;
         }
 

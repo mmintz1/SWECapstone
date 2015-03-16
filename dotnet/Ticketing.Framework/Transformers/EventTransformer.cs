@@ -18,7 +18,8 @@ namespace Ticketing.Framework.Transformers
                 Id = ev.EventId,
                 Image = ev.Image,
                 Location = ev.Location,
-                Name = ev.Name
+                Name = ev.Name,
+                Active = ev.status == 0 ? false : true
             };
 
             return model;

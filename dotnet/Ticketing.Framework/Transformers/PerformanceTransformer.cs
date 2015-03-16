@@ -27,9 +27,12 @@ namespace Ticketing.Framework.Transformers
         public List<PerformanceVM> Transform(IEnumerable<DBModels.Performance> performances)
         {
             var model = new List<PerformanceVM>();
-            foreach (var perf in performances)
+            if (performances != null && performances.Count() > 0)
             {
-                model.Add(Transform(perf));
+                foreach (var perf in performances)
+                {
+                    model.Add(Transform(perf));
+                }
             }
 
             return model;

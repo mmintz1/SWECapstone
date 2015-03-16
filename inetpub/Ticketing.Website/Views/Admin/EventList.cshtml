@@ -1,0 +1,52 @@
+﻿@model List<Ticketing.Framework.Models.Ticket.EventVM>
+@{
+    ViewBag.Title = "EventList";
+}
+
+<hgroup class="title">
+    <h1>Performance List</h1>
+    @Html.ActionLink("Create Event", "CreateEvent", new { controller = "Admin" })
+</hgroup>
+
+
+<table>
+    <tr>
+        <th>
+            Event Name
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Active
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditEvent", new { controller = "Admin", id = item.Id }) |
+            @Html.ActionLink("View Performances", "PerformanceList", new { controller = "Admin", id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

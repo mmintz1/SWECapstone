@@ -17,5 +17,6 @@ namespace Ticketing.Framework.Models.Ticket
         public List<PerformanceVM> Performances { get; set; }
         public int Id { get; set; }
         public List<Category> Categories { get; set; }
+        public bool Active { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<Ticketing.Framework.Models.Ticket.PerformanceVM>
+﻿@model Ticketing.Framework.Models.Ticket.EventVM
 @{
     ViewBag.Title = "PerformanceList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,6 +6,7 @@
 
 <hgroup class="title">
     <h1>Performance List</h1>
+    @Html.ActionLink("Create Performance", "CreatePerformance", new { controller = "Admin", id = Model.Id })
 </hgroup>
 
 
@@ -28,7 +29,7 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Performances) {
     <tr>
         <td>
             Test
@@ -43,8 +44,8 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "EditProject", new { controller = "Project", id = item.Id }) |
-            @Html.ActionLink("Details", "ProjectDetails", new { controller = "Project", id = item.Id }) |
+            @Html.ActionLink("Edit", "EditPerformance", new { controller = "Admin", id = item.Id }) |
+            @*@Html.ActionLink("Details", "ProjectDetails", new { controller = "Project", id = item.Id }) |
             @Html.ActionLink("View Tasks", "Index", new { controller = "Task", id = item.Id }) |
             @Html.ActionLink("View Requirements", "Index", new { controller = "Requirement", id = item.Id }) |
             @Html.ActionLink("View Risks", "Index", new { controller = "Risk", id = item.Id }) |
