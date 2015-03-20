@@ -110,6 +110,20 @@ namespace Ticketing.Framework.Mediators
             return perf;
         }
 
+        public List<PerformanceVM> GetAllPerformances()
+        {
+            var performances = new List<PerformanceVM>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
+                var perfs = resp.Get(p => p.Date > DateTime.Now);
+
+                var transformer = new PerformanceTransformer();
+                performances = transformer.Transform(perfs);
+            }
+            return performances;
+        }
+
         public bool CreatePerformance(PerformanceVM model)
         {
             var success = false;
@@ -119,7 +133,7 @@ namespace Ticketing.Framework.Mediators
 
                 var perf = new Performance
                 {
-                    Date = model.PerformanceDate,
+                    Date = DateTime.Parse(model.PerformanceDate),
                     EventId = model.EventId,
                     Price = model.Price,
                     status = model.Cancelled,
@@ -141,7 +155,7 @@ namespace Ticketing.Framework.Mediators
                 var resp = new PerformanceRepository(db);
                 Performance perf = resp.GetFirstOrDefault(p => p.PerformanceId == model.Id);
 
-                perf.Date = model.PerformanceDate;
+                perf.Date = DateTime.Parse(model.PerformanceDate);
                 perf.Price = model.Price;
                 perf.status = model.Cancelled;
                 perf.TotalTickets = model.AvailableTickets;

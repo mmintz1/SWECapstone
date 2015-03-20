@@ -18,17 +18,18 @@
         <div class="editor-field">
             @Html.TextBoxFor(l => l.PerformanceDate, new { required = "" })
         </div>
+        @Html.ValidationMessageFor(l => l.PerformanceDate)
         <div class="editor-label">
             @Html.LabelFor(l => l.AvailableTickets, "Available Seats")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.AvailableTickets, new { required = "" })
+            @Html.TextBoxFor(l => l.AvailableTickets, new { required = "", @min = 0 })
         </div>            
         <div class="editor-label">
             @Html.LabelFor(l => l.Price, "Price")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.Price, new { required = "" })
+            @Html.TextBoxFor(l => l.Price, new { required = "", @min = 0 })
         </div>
         <div class="editor-label">
             @Html.LabelFor(l => l.Cancelled, "Cancelled")
@@ -45,7 +46,7 @@
         @Html.HiddenFor(l => l.EventId)
         <p>
             <input type="submit" value="submit" />
-            @Html.ActionLink("Cancel", "EventList", new { controller = "Admin" })
+            @Html.ActionLink("Cancel", "PerformanceList", new { controller = "Admin", id = Model.EventId })
         </p>
 
     </fieldset>

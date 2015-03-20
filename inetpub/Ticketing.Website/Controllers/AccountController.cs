@@ -41,7 +41,7 @@ namespace Ticketing.Website.Controllers
 
                 //Session["UserAccount"] = mediator.GetUser(user.Email);
 
-                return Redirect("~/");
+                return Redirect("/admin/eventList");
             }
             else
             {
@@ -70,7 +70,7 @@ namespace Ticketing.Website.Controllers
                 bool success = mediator.RegisterUser(user);
 
                 if (success)
-                    return Redirect("/");
+                    return Redirect("/account/login");
                 else
                     ModelState.AddModelError("ErrorMessage", "Unable to create account");
 

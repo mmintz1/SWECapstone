@@ -89,7 +89,7 @@ namespace Ticketing.Website.Controllers
             var success = mediator.UpdatePerformance(model);
 
             if (success)
-                return Redirect("/");
+                return Redirect("/admin/performanceList/" + model.EventId);
             else
             {
                 ViewBag.PageTitle = "Edit Performance";
@@ -110,12 +110,18 @@ namespace Ticketing.Website.Controllers
         [HttpPost]
         public ActionResult CreatePerformance(PerformanceVM model)
         {
+            if (string.IsNullOrEmpty(model.PerformanceDate))
+            {
+                model.PerformanceDate = "";
+                ViewBag.PageTitle = "Create Performance";
+                return View("~/Views/Admin/PerformanceForm.cshtml", model);
+            }
             var mediator = new TicketMediator();
             model.Id = 0;
             var success = mediator.CreatePerformance(model);
 
             if (success)
-                return Redirect("/");
+                return Redirect("/admin/performanceList/" + model.EventId);
             else
             {
                 ViewBag.PageTitle = "Create Performance";
