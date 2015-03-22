@@ -1,0 +1,43 @@
+﻿@model Ticketing.Framework.Models.Ticket.PerformanceVM
+@{
+    List<SelectListItem> selectQuantity = new List<SelectListItem>();
+    for (int i=1; i<9; i++)
+    {
+        selectQuantity.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
+    }
+        
+    
+}
+
+<div class="box">
+    <div class="column">
+        <p><b>Event Name</b></p>
+        <p>@Model.PerformanceDate</p>
+        <p>Location</p>
+    </div>
+    <div class="column">
+        @if (Model.Cancelled)
+        {
+            <p>Cancelled</p>
+        } else if (Model.AvailableTickets == 0) {
+            <p>Sold Out</p>
+        } else {
+            <p><b>Seats Available</b></p>
+            <p>@Model.AvailableTickets</p>
+        }
+    </div>
+    <div class="column">
+        <p><b>Price</b></p>
+        <p>@Model.Price.ToString("C")</p>
+    </div>
+
+    
+    <div class="column">
+        @using (Html.BeginForm("AddToCart", "Event"))
+        {
+            <p><input type="submit" id="submit" value="Add to Cart" /></p>
+            <p>Quantity @Html.DropDownListFor(p => p.Quantity, selectQuantity)</p>
+            @Html.HiddenFor(p => p.PerformanceId)   
+        }
+    </div>
+</div>

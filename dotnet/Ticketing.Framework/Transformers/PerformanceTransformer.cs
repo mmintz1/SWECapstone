@@ -16,7 +16,7 @@ namespace Ticketing.Framework.Transformers
                 AvailableTickets = (int)perf.TotalTickets,
                 Cancelled = perf.status,
                 EventId = (int)perf.EventId,
-                Id = perf.PerformanceId,
+                PerformanceId = perf.PerformanceId,
                 PerformanceDate = ((DateTime)perf.Date).ToString("MM/dd/yy"),
                 Price = (decimal)perf.Price
             };

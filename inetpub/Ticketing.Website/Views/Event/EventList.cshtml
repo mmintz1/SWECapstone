@@ -1,0 +1,17 @@
+﻿@model List<Ticketing.Framework.Models.Ticket.EventVM>
+@{
+    ViewBag.Title = "EventList";
+}
+
+<hgroup class="title">
+    <h1>Event List</h1>
+</hgroup>
+
+
+@foreach (var ev in Model)
+{
+    <div>
+        <p>@ev.Name</p>
+        @Html.ActionLink("Event Details", "EventDetails", new { controller = "Event", id = ev.Id })
+    </div>
+}

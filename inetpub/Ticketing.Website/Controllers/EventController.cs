@@ -26,5 +26,17 @@ namespace Ticketing.Website.Controllers
             return View(model);
         }
 
+        public ActionResult EventList()
+        {
+            var mediator = new TicketMediator();
+            List<EventVM> events = mediator.GetEvents();
+            return View(events);
+        }
+
+        public ActionResult AddToCart(int performanceId, int quantity)
+        {
+            return Redirect("/Checkout/Cart");
+        }
+
     }
 }

@@ -241,6 +241,8 @@
     <Content Include="Views\Admin\EventForm.cshtml" />
     <Content Include="Views\Admin\EventList.cshtml" />
     <Content Include="Views\Event\EventDetails.cshtml" />
+    <Content Include="Views\Event\EventList.cshtml" />
+    <Content Include="Views\Shared\Partial\PerformanceGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,11 @@ namespace Ticketing.Website.Controllers
             return View();
         }
 
+        public ActionResult Cart()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Review()
         {

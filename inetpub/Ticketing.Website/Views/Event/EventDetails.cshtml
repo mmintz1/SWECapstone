@@ -9,5 +9,5 @@
 
 @foreach (var perf in Model.Performances)
 {
-
+    @Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", perf)
 }

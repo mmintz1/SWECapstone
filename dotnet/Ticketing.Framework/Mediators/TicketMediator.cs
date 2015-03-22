@@ -153,7 +153,7 @@ namespace Ticketing.Framework.Mediators
             using (var db = new ManagementToolProjectEntities())
             {
                 var resp = new PerformanceRepository(db);
-                Performance perf = resp.GetFirstOrDefault(p => p.PerformanceId == model.Id);
+                Performance perf = resp.GetFirstOrDefault(p => p.PerformanceId == model.PerformanceId);
 
                 perf.Date = DateTime.Parse(model.PerformanceDate);
                 perf.Price = model.Price;

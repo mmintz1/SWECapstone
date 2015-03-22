@@ -117,7 +117,7 @@ namespace Ticketing.Website.Controllers
                 return View("~/Views/Admin/PerformanceForm.cshtml", model);
             }
             var mediator = new TicketMediator();
-            model.Id = 0;
+            model.PerformanceId = 0;
             var success = mediator.CreatePerformance(model);
 
             if (success)

@@ -582,6 +582,7 @@ select {
     padding: 2px;
     font-size: 1.2em;
     color: #444;
+    width:50px;
 }
 
 .clear {
@@ -606,3 +607,6 @@ select {
 .text-box.multi-line {
     height: 6.5em;
 }
+
+.box { border: 1px solid #000; padding: 0 15px; margin-top:15px; }
+.column { width:23%; display:inline-block; vertical-align:top; }
