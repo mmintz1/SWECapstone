@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Ticketing.Framework.Models.Ticket.PerformanceVM>
+@{
     ViewBag.Title = "Index";
 }
 
@@ -13,5 +14,21 @@
     </section>
 }
 
+<section class="content-wrapper main-content clear-fix">
+    <article>
+        <p>
+            Welcome to our site. This is filler content until we add actual content.
+            We should have a few sentences here as this is the landing page.
+        </p>
+    </article>
+</section>
 <h3>We suggest the following:</h3>
 
+<hgroup class="title">
+    <h1>Upcoming Performances</h1>
+</hgroup>
+
+@foreach (var perf in Model)
+{
+    @Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", perf)
+}

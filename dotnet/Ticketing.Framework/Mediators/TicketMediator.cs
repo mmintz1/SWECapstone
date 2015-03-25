@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ticketing.Framework.Data;
 using Ticketing.Framework.DBModels;
+using Ticketing.Framework.Models.Cart;
 using Ticketing.Framework.Models.Common;
 using Ticketing.Framework.Models.Ticket;
 using Ticketing.Framework.Transformers;
@@ -124,6 +125,20 @@ namespace Ticketing.Framework.Mediators
             return performances;
         }
 
+        public List<PerformanceVM> GetUpcomingPerformances()
+        {
+            var performances = new List<PerformanceVM>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new PerformanceRepository(db);
+                var perfs = resp.Get(p => p.Date > DateTime.Now).Take(5).OrderBy(o => o.Date);
+
+                var transformer = new PerformanceTransformer();
+                performances = transformer.Transform(perfs);
+            }
+            return performances;
+        }
+
         public bool CreatePerformance(PerformanceVM model)
         {
             var success = false;
@@ -181,6 +196,11 @@ namespace Ticketing.Framework.Mediators
             }
 
             return eventTypes;
+        }
+
+        public void CompleteOrder(CartVM cart)
+        {
+
         }
     }
 }

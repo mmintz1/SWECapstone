@@ -10,6 +10,8 @@
 }
 
 <div class="box">
+    @using (Html.BeginForm("AddToCart", "Event"))
+        {
     <div class="column">
         <p><b>Event Name</b></p>
         <p>@Model.PerformanceDate</p>
@@ -33,11 +35,11 @@
 
     
     <div class="column">
-        @using (Html.BeginForm("AddToCart", "Event"))
-        {
+        
             <p><input type="submit" id="submit" value="Add to Cart" /></p>
             <p>Quantity @Html.DropDownListFor(p => p.Quantity, selectQuantity)</p>
             @Html.HiddenFor(p => p.PerformanceId)   
-        }
+        
     </div>
+    }
 </div>

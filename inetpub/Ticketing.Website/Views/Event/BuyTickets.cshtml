@@ -1,4 +1,4 @@
-﻿@model List<Ticketing.Framework.Models.Ticket.PerformanceVM>
+﻿@model Ticketing.Framework.Models.Ticket.BuyTicketsVM
 @{
     ViewBag.Title = "BuyTickets";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +8,16 @@
     <h1>Buy Tickets</h1>
 </hgroup>
 
-@foreach (var perf in Model)
-{
-    <p>@perf.PerformanceId</p>
-}
+<section class="content-wrapper main-content clear-fix">
+<article>
+    @foreach (var perf in Model.Performances)
+    {
+        @Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", perf)
+    }
+</article>
+<aside>
+    <div class="box">
+
+    </div>
+</aside>
+</section>

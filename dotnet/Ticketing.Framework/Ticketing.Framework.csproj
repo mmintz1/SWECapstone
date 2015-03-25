@@ -96,6 +96,7 @@
     <Compile Include="Models\Cart\CartVM.cs" />
     <Compile Include="Models\Cart\PaymentVM.cs" />
     <Compile Include="Models\Common\Category.cs" />
+    <Compile Include="Models\Ticket\BuyTicketsVM.cs" />
     <Compile Include="Models\Ticket\EventVM.cs" />
     <Compile Include="Models\Ticket\PerformanceVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

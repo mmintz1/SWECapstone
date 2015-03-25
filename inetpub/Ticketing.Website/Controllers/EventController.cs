@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ticketing.Framework.Mediators;
+using Ticketing.Framework.Models.Common;
 using Ticketing.Framework.Models.Ticket;
 
 namespace Ticketing.Website.Controllers
@@ -22,7 +23,11 @@ namespace Ticketing.Website.Controllers
         public ActionResult BuyTickets()
         {
             var mediator = new TicketMediator();
-            var model = mediator.GetAllPerformances();
+            var model = new BuyTicketsVM();
+            model.Performances = new List<PerformanceVM>();
+            model.Performances = mediator.GetAllPerformances();
+
+            model.Categories = new List<Category>();
             return View(model);
         }
 

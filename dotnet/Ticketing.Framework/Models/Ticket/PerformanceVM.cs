@@ -17,5 +17,6 @@ namespace Ticketing.Framework.Models.Ticket
         public bool Cancelled { get; set; }
         public int EventId { get; set; }
         public int Quantity { get; set; }
+        public string EventName { get; set; }
     }
 }

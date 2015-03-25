@@ -14,9 +14,18 @@ namespace Ticketing.Website.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Cart()
         {
-            return View();
+            var model = new CartVM();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Cart(CartVM cart)
+        {
+            return View(cart);
         }
 
         [HttpGet]
