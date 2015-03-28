@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Ticketing.Framework.Models.Common
 {
-    public class Category
+    public class EventItem
     {
-        public int CategoryId { get; set; }
         public string Name { get; set; }
+        public int EventId { get; set; }
         public bool SelectedIndicator { get; set; }
     }
 }

@@ -17,7 +17,71 @@
 </article>
 <aside>
     <div class="box">
-
+        <div class="inner">
+            <label id="from">From</label>
+            <label id="lblFromDate" class="date"></label>
+            @Html.TextBoxFor(d => d.FromDate)
+            
+        </div>
+        <div class="inner">
+            <label id="to">To</label>
+            <label id="lblToDate" class="date"></label>
+            @Html.TextBoxFor(d => d.ToDate)
+        </div>
+        <div class="inner">
+            <h4>Categories</h4>
+            <ul>
+                @for (int i = 0; i < Model.Categories.Count(); i++)
+                {
+                    <li>
+                        @Html.CheckBoxFor(model => model.Categories[i].SelectedIndicator, new { id = Model.Categories[i].CategoryId })
+                        @Html.LabelFor(model => model.Categories[i].Name, Model.Categories[i].Name)
+                        @Html.HiddenFor(model => model.Categories[i].CategoryId)
+                    </li>
+                }
+            </ul>
+        </div>
+        @*<div class="inner">
+            <h4>Events</h4>
+            <ul>
+                @for (int i = 0; i < Model.Categories.Count(); i++)
+                {
+                    <li>
+                        @Html.CheckBoxFor(model => model.Categories[i].SelectedIndicator, new { id = Model.Categories[i].CategoryId })
+                        @Html.LabelFor(model => model.Categories[i].Name, Model.Categories[i].Name)
+                        @Html.HiddenFor(model => model.Categories[i].CategoryId)
+                    </li>
+                }
+            </ul>
+        </div>*@
     </div>
 </aside>
 </section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var fromDate = $('#lblFromDate');
+        var toDate = $('#lblToDate');
+        $('#FromDate, #ToDate').Zebra_DatePicker({
+            direction: true,
+            format: 'm/d/Y',
+            show_icon: false,
+            onSelect: function (date, defaultDate, jDate, refElement) {
+                var selectedId = refElement[0].id;
+                if (selectedId == "FromDate") {
+                    fromDate.text(date);
+                } else {
+                    toDate.text(date);
+                }
+            }
+        });
+
+        $('#from').click(function () {
+            $('#FromDate').click();
+        });
+
+        $('#to').click(function () {
+            $('#ToDate').click();
+        });
+    });
+</script>

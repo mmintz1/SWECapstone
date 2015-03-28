@@ -10,8 +10,10 @@
 
 @foreach (var ev in Model)
 {
-    <div>
-        <p>@ev.Name</p>
-        @Html.ActionLink("Event Details", "EventDetails", new { controller = "Event", id = ev.Id })
+    <div class="box col45">
+        <p><b>@ev.Name</b></p>
+        <p>@ev.Location</p>
+        <p>@ev.Description</p>
+        <p>@Html.ActionLink("Event Details", "EventDetails", new { controller = "Event", id = ev.Id }, new { @class = "view" })</p>
     </div>
 }

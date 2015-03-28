@@ -609,4 +609,19 @@ select {
 }
 
 .box { border: 1px solid #000; padding: 0 15px; margin-top:15px; }
+aside .box { float:left;}
 .column { width:23%; display:inline-block; vertical-align:top; }
+
+.inner { margin-top: 10px; float:left; width:100%; }
+.inner input[type="text"] { visibility:hidden; width:5px; }
+.inner .date { float:left; padding-left:10px; }
+
+.inner ul li label { display:inline; }
+
+#from, #to { float:left; width:90px; cursor:pointer; }
+#from:before, #to:before { content:url("/Images/calendar.png"); float:right; padding-left:7px; }
+
+.box.col45 { width:45%; float:left;}
+.box.col45:first-of-type { margin-right:10px; }
+
+.view { border:1px solid #000; text-decoration:none;}

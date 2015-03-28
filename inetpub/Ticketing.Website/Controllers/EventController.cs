@@ -28,6 +28,8 @@ namespace Ticketing.Website.Controllers
             model.Performances = mediator.GetAllPerformances();
 
             model.Categories = new List<Category>();
+            model.Categories = mediator.GetEventTypes();
+            model.Events = new List<EventItem>();
             return View(model);
         }
 

@@ -14,7 +14,7 @@ namespace Ticketing.Framework.Transformers
             var model = new Category
             {
                 Name = eventType.Type,
-                Id = eventType.EventTypeId
+                CategoryId = eventType.EventTypeId
             };
 
             return model;

@@ -11,6 +11,10 @@ namespace Ticketing.Framework.Models.Ticket
     {
         public List<PerformanceVM> Performances { get; set; }
         public List<Category> Categories { get; set; }
-        public List<EventVM> Events { get; set; }
+        public List<EventItem> Events { get; set; }
+        public string ToDate { get; set; }
+        public string FromDate { get; set; }
+        public string LblToDate { get; set; }
+        public string LblFromDate { get; set; }
     }
 }
