@@ -11,6 +11,11 @@
         <EntityTypeShape EntityType="ManagementToolProjectModel.Order" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ManagementToolProjectModel.Performance" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ManagementToolProjectModel.User" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_Orders_CardType" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_Events_EventType" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_Events_Users" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_Performances_Events" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_Orders_Performances" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

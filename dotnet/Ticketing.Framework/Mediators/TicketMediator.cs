@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using Ticketing.Framework.Data;
 using Ticketing.Framework.DBModels;
 using Ticketing.Framework.Models.Cart;
@@ -27,6 +28,24 @@ namespace Ticketing.Framework.Mediators
             }
 
             return events;
+        }
+
+        public List<EventItem> GetEventItems()
+        {
+            List<EventVM> events = GetEvents();
+            var items = new List<EventItem>();
+
+            foreach (var ev in events)
+            {
+                var model = new EventItem
+                {
+                    Name = ev.Name,
+                    EventId = ev.Id
+                };
+                items.Add(model);
+            }
+            
+            return items;
         }
 
         public EventVM GetEvent(int id)
@@ -101,14 +120,16 @@ namespace Ticketing.Framework.Mediators
 
         public PerformanceVM GetPerformance(int id)
         {
-            var perf = new PerformanceVM();
+            var performance = new PerformanceVM();
             using (var db = new ManagementToolProjectEntities())
             {
                 var resp = new PerformanceRepository(db);
-                resp.Get(p => p.Date > DateTime.Now && p.TotalTickets > 0);
+                var perf = resp.GetFirstOrDefault(p => p.PerformanceId == id);
+                var transformer = new PerformanceTransformer();
+                performance = transformer.Transform(perf);
             }
 
-            return perf;
+            return performance;
         }
 
         public List<PerformanceVM> GetAllPerformances()
@@ -201,6 +222,19 @@ namespace Ticketing.Framework.Mediators
         public void CompleteOrder(CartVM cart)
         {
 
+        }
+
+        public CartVM GetCart()
+        {
+            var cart = new CartVM();
+            if (HttpContext.Current.Session["Cart"] == null)
+            {
+                HttpContext.Current.Session["Cart"] = cart;
+            }
+            else
+                cart = (CartVM)HttpContext.Current.Session["Cart"];
+
+            return cart;
         }
     }
 }

@@ -31,5 +31,8 @@ namespace Ticketing.Framework.DBModels
         public string BillingState { get; set; }
         public Nullable<int> BillingZipCode { get; set; }
         public int status { get; set; }
+    
+        public virtual CardType CardType { get; set; }
+        public virtual Performance Performance { get; set; }
     }
 }

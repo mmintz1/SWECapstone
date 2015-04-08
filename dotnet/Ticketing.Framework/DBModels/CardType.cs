@@ -14,8 +14,15 @@ namespace Ticketing.Framework.DBModels
     
     public partial class CardType
     {
+        public CardType()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int CardTypeId { get; set; }
         public string CardType1 { get; set; }
         public bool status { get; set; }
+    
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

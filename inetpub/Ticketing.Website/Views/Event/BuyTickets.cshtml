@@ -16,10 +16,12 @@
     }
 </article>
 <aside>
+    @using (Ajax.BeginForm("BuyTickets", "Event", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "PerformanceGrid" }))
+    {
     <div class="box">
         <div class="inner">
             <label id="from">From</label>
-            <label id="lblFromDate" class="date"></label>
+            <label id="lblFromDate" class="date">@Model.FromDate</label>
             @Html.TextBoxFor(d => d.FromDate)
             
         </div>
@@ -41,20 +43,24 @@
                 }
             </ul>
         </div>
-        @*<div class="inner">
+        <div class="inner">
             <h4>Events</h4>
             <ul>
-                @for (int i = 0; i < Model.Categories.Count(); i++)
+                @for (int i = 0; i < Model.Events.Count(); i++)
                 {
                     <li>
-                        @Html.CheckBoxFor(model => model.Categories[i].SelectedIndicator, new { id = Model.Categories[i].CategoryId })
-                        @Html.LabelFor(model => model.Categories[i].Name, Model.Categories[i].Name)
-                        @Html.HiddenFor(model => model.Categories[i].CategoryId)
+                        @Html.CheckBoxFor(model => model.Events[i].SelectedIndicator, new { id = Model.Events[i].EventId })
+                        @Html.LabelFor(model => model.Events[i].Name, Model.Events[i].Name)
+                        @Html.HiddenFor(model => model.Events[i].EventId)
                     </li>
                 }
             </ul>
-        </div>*@
+        </div>
+        <div class="bottom">
+            <input type="submit" id="update_filter" value="Update Filter" />
+        </div>
     </div>
+    }
 </aside>
 </section>
 
@@ -62,17 +68,22 @@
     $(document).ready(function () {
         var fromDate = $('#lblFromDate');
         var toDate = $('#lblToDate');
-        $('#FromDate, #ToDate').Zebra_DatePicker({
+        $('#FromDate').Zebra_DatePicker({
             direction: true,
             format: 'm/d/Y',
             show_icon: false,
+            pair: $('#ToDate'),
             onSelect: function (date, defaultDate, jDate, refElement) {
-                var selectedId = refElement[0].id;
-                if (selectedId == "FromDate") {
-                    fromDate.text(date);
-                } else {
-                    toDate.text(date);
-                }
+                fromDate.text(date);
+            }
+        });
+
+        $('#ToDate').Zebra_DatePicker({
+            direction: 1,
+            format: 'm/d/Y',
+            show_icon: false,
+            onSelect: function (date, defaultDate, jDate, refElement) {
+                toDate.text(date);
             }
         });
 

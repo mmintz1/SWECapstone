@@ -44,6 +44,7 @@
             @Html.PasswordFor(l => l.EventId, new { required = "" })
         </div>*@
         @Html.HiddenFor(l => l.EventId)
+        @Html.HiddenFor(l => l.PerformanceId)
         <p>
             <input type="submit" value="submit" />
             @Html.ActionLink("Cancel", "PerformanceList", new { controller = "Admin", id = Model.EventId })

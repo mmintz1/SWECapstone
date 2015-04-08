@@ -7,7 +7,4 @@
     <h1>@Model.Name</h1>
 </hgroup>
 
-@foreach (var perf in Model.Performances)
-{
-    @Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", perf)
-}
+@Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", Model.Performances)

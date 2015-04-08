@@ -625,3 +625,16 @@ aside .box { float:left;}
 .box.col45:first-of-type { margin-right:10px; }
 
 .view { border:1px solid #000; text-decoration:none;}
+
+.top-row { width:100%; text-align:right; }
+
+.row {width:100%; float:left; }
+.row input { width:100%; }
+.col30 { width:30%; float:left; }
+.col30:last-of-type { float:right; }
+.col50 { width:50%; float:left; }
+
+.col { float:left; width:auto; margin-left:10px; }
+.col:first-of-type { margin-left:0; }
+.col .zip { width:75px; }
+.col input { width:125px; }

@@ -3,33 +3,29 @@
     ViewBag.Title = "Address";
 }
 
-<div class="editor-label">
-    @Html.LabelFor(l => l.Address1, "Address")
+<div class="row">
+    <div class="editor-label">
+        @Html.LabelFor(l => l.Address1, "Address")
+        @Html.TextBoxFor(l => l.Address1, new { required = "" })
+    </div>
 </div>
-<div class="editor-field">
-    @Html.TextBoxFor(l => l.Address1, new { required = "" })
+<div class="row">
+    <div class="editor-label">
+        @Html.LabelFor(l => l.Address2, "Address cont.")
+        @Html.TextBoxFor(l => l.Address2)
+    </div>
 </div>
-<div class="editor-label">
-    @Html.LabelFor(l => l.Address2, "Address cont.")
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(l => l.Address2)
-</div>
-<div class="editor-label">
-    @Html.LabelFor(l => l.City, "City")
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(l => l.City, new { required = "" })
-</div>
-<div class="editor-label">
-    @Html.LabelFor(l => l.State, "State")
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(l => l.State, new { required = "" })
-</div>
-<div class="editor-label">
-    @Html.LabelFor(l => l.Zip, "Zip")
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(l => l.Zip, new { required = "", @maxlength = 5, @type = "number" })
+<div class="row">
+    <div class="col">
+        @Html.LabelFor(l => l.City, "City")
+        @Html.TextBoxFor(l => l.City, new { required = "" })
+    </div>
+    <div class="col">
+        @Html.LabelFor(l => l.State, "State")
+        @Html.TextBoxFor(l => l.State, new { required = "" })
+    </div>
+    <div class="col">
+        @Html.LabelFor(l => l.Zip, "Zip")
+        @Html.TextBoxFor(l => l.Zip, new { required = "", @maxlength = 5, @type = "number", @class = "zip" })
+    </div>
 </div>

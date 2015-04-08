@@ -7,3 +7,36 @@
 <hgroup class="title">
     <h1>Cart</h1>
 </hgroup>
+<div class="top-row">
+    @Html.ActionLink("Checkout", "Review", new { controller = "Checkout" }, new { @class = "view" })
+</div>
+@foreach (var perf in Model.Performances)
+{
+<div class="box" data-eventId="@perf.EventId">
+    @using (Html.BeginForm("Remove", "Checkout"))
+    {
+    <div class="column">
+        <p><b>@perf.EventName</b></p>
+        <p>@perf.PerformanceDate</p>
+        <p>Location</p>
+    </div>
+    <div class="column">        
+        <p><b>Quantity</b></p>
+        <p>@perf.Quantity</p>
+    </div>
+    <div class="column">
+        <p><b>Price</b></p>
+        <p>@perf.Price.ToString("C")</p>
+    </div>
+    <div class="column">
+        <p><input type="submit" id="submit" value="Remove from Cart" /></p>
+        @Html.HiddenFor(p => perf.Quantity)
+        @Html.HiddenFor(p => perf.PerformanceId)
+        @Html.HiddenFor(p => perf.EventName)
+        @Html.HiddenFor(p => perf.PerformanceDate)
+        @Html.HiddenFor(p => perf.Price)
+        @Html.HiddenFor(p => perf.EventId)
+    </div>
+    }
+</div>
+}

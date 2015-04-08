@@ -9,6 +9,10 @@ namespace Ticketing.Framework.Models.Cart
 {
     public class CartVM
     {
+        public CartVM()
+        {
+            Performances = new List<PerformanceVM>();
+        }
         public decimal Total { get; set; }
         public List<PerformanceVM> Performances { get; set; }
     }

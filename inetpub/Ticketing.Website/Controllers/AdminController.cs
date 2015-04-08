@@ -74,10 +74,10 @@ namespace Ticketing.Website.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditPerformance()
+        public ActionResult EditPerformance(int id)
         {
             var mediator = new TicketMediator();
-            var model = mediator.GetPerformance(0);
+            var model = mediator.GetPerformance(id);
             ViewBag.PageTitle = "Edit Performance";
             return View("~/Views/Admin/PerformanceForm.cshtml", model);
         }

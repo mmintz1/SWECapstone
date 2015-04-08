@@ -19,8 +19,18 @@ namespace Ticketing.Framework.Transformers
                 Image = ev.Image,
                 Location = ev.Location,
                 Name = ev.Name,
-                Active = ev.status == 0 ? false : true
+                Active = ev.status == 0 ? false : true,
+                Performances = new List<PerformanceVM>()
             };
+
+            var trans = new PerformanceTransformer();
+            model.Performances = trans.Transform(ev.Performances);
+
+            foreach (var perf in model.Performances)
+            {
+                perf.EventName = ev.Name;
+            }
+            
 
             return model;
         }

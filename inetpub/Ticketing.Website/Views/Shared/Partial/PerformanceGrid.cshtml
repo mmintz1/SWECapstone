@@ -8,12 +8,13 @@
         
     
 }
+<div id="PerformanceGrid">
 
-<div class="box">
+<div class="box" data-eventId="@Model.EventId">
     @using (Html.BeginForm("AddToCart", "Event"))
-        {
+    {
     <div class="column">
-        <p><b>Event Name</b></p>
+        <p><b>@Model.EventName</b></p>
         <p>@Model.PerformanceDate</p>
         <p>Location</p>
     </div>
@@ -21,7 +22,9 @@
         @if (Model.Cancelled)
         {
             <p>Cancelled</p>
-        } else if (Model.AvailableTickets == 0) {
+        }
+        else if (Model.AvailableTickets == 0)
+        {
             <p>Sold Out</p>
         } else {
             <p><b>Seats Available</b></p>
@@ -35,11 +38,14 @@
 
     
     <div class="column">
-        
-            <p><input type="submit" id="submit" value="Add to Cart" /></p>
-            <p>Quantity @Html.DropDownListFor(p => p.Quantity, selectQuantity)</p>
-            @Html.HiddenFor(p => p.PerformanceId)   
-        
+        <p><input type="submit" id="submit" value="Add to Cart" /></p>
+        <p>Quantity @Html.DropDownListFor(p => Model.Quantity, selectQuantity)</p>
+        @Html.HiddenFor(p => Model.PerformanceId)
+        @Html.HiddenFor(p => Model.EventName)
+        @Html.HiddenFor(p => Model.PerformanceDate)
+        @Html.HiddenFor(p => Model.Price)
+        @Html.HiddenFor(p => Model.EventId)
     </div>
     }
+</div>
 </div>

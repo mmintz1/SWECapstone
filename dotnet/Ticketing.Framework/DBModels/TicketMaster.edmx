@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ManagementToolProjectModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ManagementToolProjectModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ManagementToolProjectModelStoreContainer">
           <EntitySet Name="CardType" EntityType="ManagementToolProjectModel.Store.CardType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Events" EntityType="ManagementToolProjectModel.Store.Events" store:Type="Tables" Schema="dbo" />
@@ -12,6 +12,26 @@
           <EntitySet Name="Orders" EntityType="ManagementToolProjectModel.Store.Orders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Performances" EntityType="ManagementToolProjectModel.Store.Performances" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="ManagementToolProjectModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Events_EventType" Association="ManagementToolProjectModel.Store.FK_Events_EventType">
+            <End Role="EventType" EntitySet="EventType" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Users" Association="ManagementToolProjectModel.Store.FK_Events_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CardType" Association="ManagementToolProjectModel.Store.FK_Orders_CardType">
+            <End Role="CardType" EntitySet="CardType" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Performances" Association="ManagementToolProjectModel.Store.FK_Orders_Performances">
+            <End Role="Performances" EntitySet="Performances" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performances_Events" Association="ManagementToolProjectModel.Store.FK_Performances_Events">
+            <End Role="Events" EntitySet="Events" />
+            <End Role="Performances" EntitySet="Performances" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CardType">
           <Key>
@@ -75,6 +95,7 @@
           <Property Name="Price" Type="decimal" />
           <Property Name="TotalTickets" Type="int" />
           <Property Name="status" Type="bit" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="125" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -87,8 +108,77 @@
           <Property Name="LastName" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <Association Name="FK_Events_EventType">
+          <End Role="EventType" Type="ManagementToolProjectModel.Store.EventType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Events" Type="ManagementToolProjectModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventType">
+              <PropertyRef Name="EventTypeId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="EventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Users">
+          <End Role="Users" Type="ManagementToolProjectModel.Store.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Events" Type="ManagementToolProjectModel.Store.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="CreateById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CardType">
+          <End Role="CardType" Type="ManagementToolProjectModel.Store.CardType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="ManagementToolProjectModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="CardTypeId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Performances">
+          <End Role="Performances" Type="ManagementToolProjectModel.Store.Performances" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Orders" Type="ManagementToolProjectModel.Store.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performances">
+              <PropertyRef Name="PerformanceId" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PerformanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performances_Events">
+          <End Role="Events" Type="ManagementToolProjectModel.Store.Events" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Performances" Type="ManagementToolProjectModel.Store.Performances" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Events">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Performances">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ManagementToolProjectModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -99,6 +189,26 @@
           <EntitySet Name="Orders" EntityType="ManagementToolProjectModel.Order" />
           <EntitySet Name="Performances" EntityType="ManagementToolProjectModel.Performance" />
           <EntitySet Name="Users" EntityType="ManagementToolProjectModel.User" />
+          <AssociationSet Name="FK_Orders_CardType" Association="ManagementToolProjectModel.FK_Orders_CardType">
+            <End Role="CardType" EntitySet="CardTypes" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_EventType" Association="ManagementToolProjectModel.FK_Events_EventType">
+            <End Role="EventType" EntitySet="EventTypes" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Users" Association="ManagementToolProjectModel.FK_Events_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Performances_Events" Association="ManagementToolProjectModel.FK_Performances_Events">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Performance" EntitySet="Performances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Performances" Association="ManagementToolProjectModel.FK_Orders_Performances">
+            <End Role="Performance" EntitySet="Performances" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CardType">
           <Key>
@@ -107,6 +217,7 @@
           <Property Name="CardTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="CardType1" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="ManagementToolProjectModel.FK_Orders_CardType" FromRole="CardType" ToRole="Order" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -121,6 +232,9 @@
           <Property Name="CreateById" Type="Int32" />
           <Property Name="Image" Type="String" MaxLength="45" Unicode="false" FixedLength="false" />
           <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EventType" Relationship="ManagementToolProjectModel.FK_Events_EventType" FromRole="Event" ToRole="EventType" />
+          <NavigationProperty Name="User" Relationship="ManagementToolProjectModel.FK_Events_Users" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Performances" Relationship="ManagementToolProjectModel.FK_Performances_Events" FromRole="Event" ToRole="Performance" />
         </EntityType>
         <EntityType Name="EventType">
           <Key>
@@ -129,6 +243,7 @@
           <Property Name="EventTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="ManagementToolProjectModel.FK_Events_EventType" FromRole="EventType" ToRole="Event" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -151,6 +266,8 @@
           <Property Name="BillingState" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="BillingZipCode" Type="Int32" />
           <Property Name="status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CardType" Relationship="ManagementToolProjectModel.FK_Orders_CardType" FromRole="Order" ToRole="CardType" />
+          <NavigationProperty Name="Performance" Relationship="ManagementToolProjectModel.FK_Orders_Performances" FromRole="Order" ToRole="Performance" />
         </EntityType>
         <EntityType Name="Performance">
           <Key>
@@ -162,6 +279,9 @@
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="TotalTickets" Type="Int32" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <Property Type="String" Name="EventName" MaxLength="125" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="ManagementToolProjectModel.FK_Performances_Events" FromRole="Performance" ToRole="Event" />
+          <NavigationProperty Name="Orders" Relationship="ManagementToolProjectModel.FK_Orders_Performances" FromRole="Performance" ToRole="Order" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -173,7 +293,78 @@
           <Property Name="FirstName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="LastName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Events" Relationship="ManagementToolProjectModel.FK_Events_Users" FromRole="User" ToRole="Event" />
         </EntityType>
+        <Association Name="FK_Orders_CardType">
+          <End Type="ManagementToolProjectModel.CardType" Role="CardType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ManagementToolProjectModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CardType">
+              <PropertyRef Name="CardTypeId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_EventType">
+          <End Type="ManagementToolProjectModel.EventType" Role="EventType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ManagementToolProjectModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventType">
+              <PropertyRef Name="EventTypeId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="EventTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_Users">
+          <End Type="ManagementToolProjectModel.User" Role="User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ManagementToolProjectModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreateById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Performances_Events">
+          <End Type="ManagementToolProjectModel.Event" Role="Event" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ManagementToolProjectModel.Performance" Role="Performance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="EventId" />
+            </Principal>
+            <Dependent Role="Performance">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Performances">
+          <End Type="ManagementToolProjectModel.Performance" Role="Performance" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ManagementToolProjectModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="PerformanceId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PerformanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -239,6 +430,7 @@
           <EntitySetMapping Name="Performances">
             <EntityTypeMapping TypeName="ManagementToolProjectModel.Performance">
               <MappingFragment StoreEntitySet="Performances">
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
                 <ScalarProperty Name="PerformanceId" ColumnName="PerformanceId" />
                 <ScalarProperty Name="EventId" ColumnName="EventId" />
                 <ScalarProperty Name="Date" ColumnName="Date" />

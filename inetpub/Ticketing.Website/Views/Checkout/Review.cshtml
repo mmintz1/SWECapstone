@@ -23,59 +23,61 @@
 
 @using (Html.BeginForm("Review", "Checkout", FormMethod.Post, new { @class = "management-form" }))
 {
-    
     <fieldset>
         <legend>Account Information</legend>
         @Html.ValidationMessage("ErrorMessage")
-        <div class="editor-label">
-            @Html.LabelFor(l => l.FirstName, "First Name")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.FirstName, new { required = "" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(l => l.LastName, "Last Name")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.LastName, new { required = "" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(l => l.Email, "Email")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.Email, new { required = "", type = "email" })
-        </div>
+        <div class="col50">
+            <div class="row">
+                <div class="col">
+                    @Html.LabelFor(l => l.FirstName, "First Name")
+                    @Html.TextBoxFor(l => l.FirstName, new { required = "" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(l => l.LastName, "Last Name")
+                    @Html.TextBoxFor(l => l.LastName, new { required = "" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    @Html.LabelFor(l => l.Email, "Email")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(l => l.Email, new { required = "", type = "email" })
+                </div>
+            </div>
 
-        @Html.EditorFor(address => address.BillingAddress)
-        @Html.EditorFor(address => address.ShippingAddress)
-
-        <div class="editor-label">
-            @Html.LabelFor(l => l.CreditCardType, "Card Type")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.CreditCardType, new { required = "" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(l => l.CreditCardNumber, "Card Number")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(l => l.CVV, "Security Code")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.CVV, new { required = "" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(l => l.NameOnCard, "Name On Card")
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(l => l.NameOnCard, new { required = "" })
-        </div>
+            @Html.EditorFor(address => address.BillingAddress)
+            @Html.EditorFor(address => address.ShippingAddress)
+            <div class="row">
+                <div class="editor-label">
+                    @Html.LabelFor(l => l.CreditCardType, "Card Type")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(l => l.CreditCardType, new { required = "" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="editor-label">
+                    @Html.LabelFor(l => l.NameOnCard, "Name On Card")
+                </div>
+                <div class="editor-field">
+                    @Html.TextBoxFor(l => l.NameOnCard, new { required = "" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    @Html.LabelFor(l => l.CreditCardNumber, "Card Number")
+                    @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(l => l.CVV, "Security Code")
+                    @Html.TextBoxFor(l => l.CVV, new { required = "", @class = "zip" })
+                </div>
+            </div>
             
-        <p>
-            <input type="submit" value="submit" />
-        </p>
+            <p>
+                <input type="submit" value="submit" />
+            </p>
+        </div>
     </fieldset>
 }

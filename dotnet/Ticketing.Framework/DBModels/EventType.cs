@@ -14,8 +14,15 @@ namespace Ticketing.Framework.DBModels
     
     public partial class EventType
     {
+        public EventType()
+        {
+            this.Events = new HashSet<Event>();
+        }
+    
         public int EventTypeId { get; set; }
         public string Type { get; set; }
         public bool status { get; set; }
+    
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

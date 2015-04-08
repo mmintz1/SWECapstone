@@ -18,7 +18,8 @@ namespace Ticketing.Framework.Transformers
                 EventId = (int)perf.EventId,
                 PerformanceId = perf.PerformanceId,
                 PerformanceDate = ((DateTime)perf.Date).ToString("MM/dd/yy"),
-                Price = (decimal)perf.Price
+                Price = (decimal)perf.Price,
+                EventName = perf.EventName
             };
 
             return model;

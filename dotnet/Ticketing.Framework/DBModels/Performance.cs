@@ -14,11 +14,20 @@ namespace Ticketing.Framework.DBModels
     
     public partial class Performance
     {
+        public Performance()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public int PerformanceId { get; set; }
         public Nullable<int> EventId { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> TotalTickets { get; set; }
         public bool status { get; set; }
+        public string EventName { get; set; }
+    
+        public virtual Event Event { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
