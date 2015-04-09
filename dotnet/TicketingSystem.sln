@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{6C5E03
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTests", "SpecFlowTests\SpecFlowTests.csproj", "{0BE9FC3A-18ED-4669-9DB3-2057BC9C9B4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{83948E00-C8BA-4F10-AA9D-E8A80B151CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83948E00-C8BA-4F10-AA9D-E8A80B151CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83948E00-C8BA-4F10-AA9D-E8A80B151CF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BE9FC3A-18ED-4669-9DB3-2057BC9C9B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BE9FC3A-18ED-4669-9DB3-2057BC9C9B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BE9FC3A-18ED-4669-9DB3-2057BC9C9B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BE9FC3A-18ED-4669-9DB3-2057BC9C9B4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
