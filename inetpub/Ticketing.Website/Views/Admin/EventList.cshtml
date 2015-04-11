@@ -4,7 +4,7 @@
 }
 
 <hgroup class="title">
-    <h1>Performance List</h1>
+    <h1>Event List</h1>
     @Html.ActionLink("Create Event", "CreateEvent", new { controller = "Admin" })
 </hgroup>
 
@@ -37,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.Location)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category)
+            @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Active)

@@ -14,6 +14,7 @@ namespace Ticketing.Framework.Models.Cart
         public string Email { get; set; }
         public Address BillingAddress { get; set; }
         public Address ShippingAddress { get; set; }
+        public bool SameAsBilling { get; set; }
 
         public string CreditCardType { get; set; }
         public string CVV { get; set; }

@@ -23,14 +23,16 @@
             @Html.LabelFor(l => l.AvailableTickets, "Available Seats")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.AvailableTickets, new { required = "", @min = 0 })
+            @Html.TextBoxFor(l => l.AvailableTickets, new { required = "", min = 0, digits = true })
         </div>            
+        @Html.ValidationMessageFor(l => l.AvailableTickets)
         <div class="editor-label">
             @Html.LabelFor(l => l.Price, "Price")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.Price, new { required = "", @min = 0 })
+            @Html.TextBoxFor(l => l.Price, new { required = "", @min = 0, digits = true })
         </div>
+        @Html.ValidationMessageFor(l => l.Price)
         <div class="editor-label">
             @Html.LabelFor(l => l.Cancelled, "Cancelled")
         </div>

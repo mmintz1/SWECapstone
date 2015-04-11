@@ -15,9 +15,6 @@ namespace Ticketing.Framework.Mediators
             var success = false;
             using (var db = new ManagementToolProjectEntities())
             {
-                //var resp = new UsersRepository(db);
-
-
                 bool emailExist = db.Users.FirstOrDefault(u => u.EmailAddress == reg.Email) != null;
 
                 if (!emailExist)

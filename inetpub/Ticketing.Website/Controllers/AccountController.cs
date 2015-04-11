@@ -13,7 +13,7 @@ namespace Ticketing.Website.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return Login();
         }
 
         [HttpGet]
@@ -39,8 +39,6 @@ namespace Ticketing.Website.Controllers
                     HttpContext.Response.Cookies.Add(cookie);
                 }
 
-                //Session["UserAccount"] = mediator.GetUser(user.Email);
-
                 return Redirect("/admin/eventList");
             }
             else
@@ -63,9 +61,7 @@ namespace Ticketing.Website.Controllers
             var mediator = new AccountMediator();
             if (user.Password != user.VerifyPassword)
                 ModelState.AddModelError("ErrorMessage", "Passwords don't match");
-
-
-            if (ModelState.IsValid)
+            else if (ModelState.IsValid)
             {
                 bool success = mediator.RegisterUser(user);
 

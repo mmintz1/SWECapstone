@@ -430,7 +430,7 @@ input, textarea {
 
 textarea {
     font-family: inherit;
-    width: 500px;
+    /*width: 500px;*/
 }
 
 input:focus, textarea:focus {
@@ -494,13 +494,15 @@ td button {
 .field-validation-error {
     color: #e80c4d;
     font-weight: bold;
+    display:block;
 }
 
 .field-validation-valid {
     display: none;
 }
 
-input.input-validation-error {
+input.input-validation-error,
+textarea.input-validation-error {
     border: 1px solid #e80c4d;
 }
 
@@ -634,7 +636,13 @@ aside .box { float:left;}
 .col30:last-of-type { float:right; }
 .col50 { width:50%; float:left; }
 
+.review { width:400px; }
 .col { float:left; width:auto; margin-left:10px; }
 .col:first-of-type { margin-left:0; }
 .col .zip { width:75px; }
 .col input { width:125px; }
+.col .exp { width:70px; }
+.row .sameShipping { width:auto; margin-top:1em; }
+.hideme { display:none !important; }
+
+.dropdown { width:auto; }

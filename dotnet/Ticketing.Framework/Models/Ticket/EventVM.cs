@@ -13,6 +13,7 @@ namespace Ticketing.Framework.Models.Ticket
         public string Description { get; set; }
         public string Location { get; set; }
         public int Category { get; set; }
+        public string CategoryName { get; set; }
         public string Image { get; set; }
         public List<PerformanceVM> Performances { get; set; }
         public int Id { get; set; }

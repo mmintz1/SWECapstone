@@ -14,7 +14,17 @@
         Model.ShippingAddress = new Address();   
     }
 
-    
+    List<SelectListItem> years = new List<SelectListItem>();
+    for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+    {
+        years.Add(new SelectListItem { Value = i.ToString(), Text = i.ToString() });
+    }
+
+    List<SelectListItem> months = new List<SelectListItem>();
+    for (int i = 1; i < 13; i++)
+    {
+        months.Add(new SelectListItem { Value = i.ToString(), Text = i.ToString() });
+    }
 }
 
 <hgroup class="title">
@@ -26,15 +36,17 @@
     <fieldset>
         <legend>Account Information</legend>
         @Html.ValidationMessage("ErrorMessage")
-        <div class="col50">
+        <div class="review">
             <div class="row">
                 <div class="col">
                     @Html.LabelFor(l => l.FirstName, "First Name")
                     @Html.TextBoxFor(l => l.FirstName, new { required = "" })
+                    @Html.ValidationMessageFor(l => l.FirstName)
                 </div>
                 <div class="col">
                     @Html.LabelFor(l => l.LastName, "Last Name")
                     @Html.TextBoxFor(l => l.LastName, new { required = "" })
+                    @Html.ValidationMessageFor(l => l.LastName)
                 </div>
             </div>
             <div class="row">
@@ -43,17 +55,30 @@
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.Email, new { required = "", type = "email" })
+                    @Html.ValidationMessageFor(l => l.Email)
                 </div>
             </div>
-
+            <div class="row">
+                <h3>Billing Info</h3>
+            </div>
             @Html.EditorFor(address => address.BillingAddress)
-            @Html.EditorFor(address => address.ShippingAddress)
+            <div class="row">
+                @Html.CheckBoxFor(s => s.SameAsBilling, new { @class = "sameShipping" })
+                <span>Is Shipping Address is Same as Billing Address?</span>
+            </div>
+            <div id="shippingBlock" class="hideme">
+                <div class="row">
+                    <h3>Shipping Info</h3>
+                </div>
+                @Html.EditorFor(address => address.ShippingAddress)
+            </div>
             <div class="row">
                 <div class="editor-label">
                     @Html.LabelFor(l => l.CreditCardType, "Card Type")
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.CreditCardType, new { required = "" })
+                    @Html.ValidationMessageFor(l => l.CreditCardType)
                 </div>
             </div>
             <div class="row">
@@ -62,16 +87,29 @@
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.NameOnCard, new { required = "" })
+                    @Html.ValidationMessageFor(l => l.NameOnCard)
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     @Html.LabelFor(l => l.CreditCardNumber, "Card Number")
-                    @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "" })
+                    @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "", creditcard = true, digits = true })
+                    @Html.ValidationMessageFor(l => l.CreditCardNumber)
                 </div>
                 <div class="col">
                     @Html.LabelFor(l => l.CVV, "Security Code")
-                    @Html.TextBoxFor(l => l.CVV, new { required = "", @class = "zip" })
+                    @Html.TextBoxFor(l => l.CVV, new { required = "", @class = "zip", digits = true })
+                    @Html.ValidationMessageFor(l => l.CVV)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Exp Month</label>
+                    @Html.DropDownListFor(l => l.ExpirationMonth, months, new { required = "", @class = "exp" })
+                </div>
+                <div class="col">
+                    <label>Exp Year</label>
+                    @Html.DropDownListFor(l => l.ExpirationYear, years, new { required = "", @class = "exp" })
                 </div>
             </div>
             
@@ -81,3 +119,11 @@
         </div>
     </fieldset>
 }
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#SameAsBilling').change(function () {
+            $('#shippingBlock').toggleClass('hideme');
+        })
+    });
+</script>

@@ -18,12 +18,14 @@
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Name, new { required = "" })
         </div>
+        @Html.ValidationMessageFor(l => l.Name)
         <div class="editor-label">
             @Html.LabelFor(l => l.Location, "Location")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Location, new { required = "" })
         </div>            
+        @Html.ValidationMessageFor(l => l.Location)
         <div class="editor-label">
             @Html.LabelFor(l => l.Image, "Image")
         </div>
@@ -34,13 +36,14 @@
             @Html.LabelFor(l => l.Description, "Description")
         </div>
         <div class="editor-field">
-            @Html.TextBoxFor(l => l.Description, new { required = "" })
+            @Html.TextAreaFor(l => l.Description, new { required = true })
         </div>
+        @Html.ValidationMessageFor(l => l.Description)
         <div class="editor-label">
             @Html.LabelFor(l => l.Category, "Category")
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(l => l.Category, new SelectList(Model.Categories, "Id", "Name"), new { required = "" })
+            @Html.DropDownListFor(l => l.Category, new SelectList(Model.Categories, "CategoryId", "Name"), new { required = "", @class = "dropdown" })
         </div>
 
         <p>

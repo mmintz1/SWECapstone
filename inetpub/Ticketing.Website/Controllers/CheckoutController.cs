@@ -35,6 +35,7 @@ namespace Ticketing.Website.Controllers
         public ActionResult Review()
         {
             var model = new PaymentVM();
+            model.SameAsBilling = true;
             return View("~/Views/Checkout/Review.cshtml", model);
         }
 

@@ -136,7 +136,7 @@ namespace Ticketing.Website.Controllers
             var mediator = new TicketMediator();
             var model = mediator.GetEvent(id);
             model.Performances = new List<PerformanceVM>();
-            model.Performances = mediator.GetPerformances(id);
+            model.Performances = mediator.GetPerformances(id).OrderBy(d => d.PerformanceDate).ToList();
 
             return View("~/Views/Admin/PerformanceList.cshtml", model);
         }

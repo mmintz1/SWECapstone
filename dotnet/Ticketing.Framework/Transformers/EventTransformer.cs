@@ -14,6 +14,7 @@ namespace Ticketing.Framework.Transformers
             var model = new EventVM
             {
                 Category = ev.EventTypeId.HasValue ? (int)ev.EventTypeId : 0,
+                CategoryName = ev.EventType.Type,
                 Description = ev.Description,
                 Id = ev.EventId,
                 Image = ev.Image,
