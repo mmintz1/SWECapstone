@@ -37,6 +37,22 @@ namespace Ticketing.Website.Controllers
             return View(model);
         }
 
+        //[HttpPost]
+        //public ActionResult BuyTickets(string FromDate, string ToDate)
+        //{
+        //    var mediator = new TicketMediator();
+        //    var model = new BuyTicketsVM();
+        //    model.Performances = new List<PerformanceVM>();
+        //    model.Performances = mediator.GetAllPerformances();
+
+        //    model.Categories = new List<Category>();
+        //    model.Categories = mediator.GetEventTypes();
+        //    model.Events = new List<EventItem>();
+        //    model.Events = mediator.GetEventItems();
+        //    model.FromDate = DateTime.Today.ToString("MM/dd/yyyy");
+        //    return View(model);
+        //}
+
         public ActionResult EventList()
         {
             var mediator = new TicketMediator();
@@ -44,7 +60,7 @@ namespace Ticketing.Website.Controllers
             return View(events);
         }
 
-        public ActionResult AddToCart(PerformanceVM model)
+        public ActionResult AddToCart(PerformanceVM model, int PerformanceId)
         {
             var mediator = new TicketMediator();
             CartVM cart = mediator.GetCart();
@@ -58,9 +74,25 @@ namespace Ticketing.Website.Controllers
             var mediator = new TicketMediator();
             model.Performances = new List<PerformanceVM>();
             var perfs = mediator.GetAllPerformances();
+            var fromDate = DateTime.Parse(model.FromDate);
+            var toDate = fromDate.AddYears(1);
+            if (!string.IsNullOrEmpty(model.ToDate))
+                toDate = DateTime.Parse(model.ToDate).AddHours(1);
+
+            perfs = perfs.Where(p => DateTime.Parse(p.PerformanceDate) > fromDate && DateTime.Parse(p.PerformanceDate) < toDate).ToList();
+            
             var selectedEventType = model.Events.Where(p => p.SelectedIndicator).Select(e => e.EventId);
-            perfs = perfs.Where(p => selectedEventType.Contains(p.EventId)).ToList();
-            return PartialView("~/Views/Shared/Partial/PerformanceGrid.cshtml", perfs);
+            var selectedCategoryType = model.Categories.Where(p => p.SelectedIndicator).Select(e => e.CategoryId);
+
+            if (selectedEventType.Count() > 0)
+                perfs = perfs.Where(p => selectedEventType.Contains(p.EventId)).ToList();
+
+            if (selectedCategoryType.Count() > 0 && (perfs != null && perfs.Count > 0))
+                perfs = perfs.Where(p => selectedEventType.Contains(p.EventId)).ToList();
+
+
+            model.Performances = perfs;
+            return View(model);
         }
 
     }

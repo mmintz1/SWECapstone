@@ -10,9 +10,14 @@
 <div class="top-row">
     @Html.ActionLink("Checkout", "Review", new { controller = "Checkout" }, new { @class = "view" })
 </div>
+@if (Model.Performances == null || Model.Performances.Count == 0) {
+    <div class="box">
+        <p>Your cart is empty</p>
+    </div>
+}
 @foreach (var perf in Model.Performances)
 {
-<div class="box" data-eventId="@perf.EventId">
+<div class="box">
     @using (Html.BeginForm("Remove", "Checkout"))
     {
     <div class="column">
@@ -36,6 +41,7 @@
         @Html.HiddenFor(p => perf.PerformanceDate)
         @Html.HiddenFor(p => perf.Price)
         @Html.HiddenFor(p => perf.EventId)
+        @Html.HiddenFor(p => perf.LineNumber)
     </div>
     }
 </div>

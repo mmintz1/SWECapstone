@@ -4,19 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div id="performance-grid">
 <hgroup class="title">
     <h1>Buy Tickets</h1>
 </hgroup>
 
 <section class="content-wrapper main-content clear-fix">
 <article>
+    @if (Model.Performances.Count == 0)
+    {
+        <div class="box">
+            <p>There are no performances available that match the search criteria. </p>
+        </div>
+    }
     @foreach (var perf in Model.Performances)
     {
         @Html.Partial("/Views/Shared/Partial/PerformanceGrid.cshtml", perf)
     }
 </article>
 <aside>
-    @using (Ajax.BeginForm("BuyTickets", "Event", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "PerformanceGrid" }))
+    @using (Html.BeginForm("BuyTickets", "Event"))
     {
     <div class="box">
         <div class="inner">
@@ -27,7 +34,7 @@
         </div>
         <div class="inner">
             <label id="to">To</label>
-            <label id="lblToDate" class="date"></label>
+            <label id="lblToDate" class="date">@Model.ToDate</label>
             @Html.TextBoxFor(d => d.ToDate)
         </div>
         <div class="inner">
@@ -39,6 +46,7 @@
                         @Html.CheckBoxFor(model => model.Categories[i].SelectedIndicator, new { id = Model.Categories[i].CategoryId })
                         @Html.LabelFor(model => model.Categories[i].Name, Model.Categories[i].Name)
                         @Html.HiddenFor(model => model.Categories[i].CategoryId)
+                        @Html.HiddenFor(model => model.Categories[i].Name)
                     </li>
                 }
             </ul>
@@ -52,6 +60,7 @@
                         @Html.CheckBoxFor(model => model.Events[i].SelectedIndicator, new { id = Model.Events[i].EventId })
                         @Html.LabelFor(model => model.Events[i].Name, Model.Events[i].Name)
                         @Html.HiddenFor(model => model.Events[i].EventId)
+                        @Html.HiddenFor(model => model.Events[i].Name)
                     </li>
                 }
             </ul>
@@ -63,6 +72,7 @@
     }
 </aside>
 </section>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {

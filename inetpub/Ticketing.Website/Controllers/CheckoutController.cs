@@ -21,6 +21,12 @@ namespace Ticketing.Website.Controllers
         {
             var mediator = new TicketMediator();
             CartVM model = mediator.GetCart();
+            int i = 0;
+            foreach (var perf in model.Performances)
+            {
+                perf.LineNumber = i;
+                i++;
+            }
 
             return View(model);
         }
@@ -50,7 +56,14 @@ namespace Ticketing.Website.Controllers
         {
             var mediator = new TicketMediator();
             var cart = mediator.GetCart();
-            var success = cart.Performances.RemoveAll(p => p.PerformanceId == perf.PerformanceId);
+            cart.Performances.RemoveAt(perf.LineNumber);
+
+            int i = 0;
+            foreach (var performance in cart.Performances)
+            {
+                perf.LineNumber = i;
+                i++;
+            }
             return Redirect("/checkout/cart");
         }
     }

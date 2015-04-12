@@ -31,7 +31,7 @@ namespace Ticketing.Framework.Transformers
             var model = new List<PerformanceVM>();
             if (performances != null && performances.Count() > 0)
             {
-                foreach (var perf in performances)
+                foreach (var perf in performances.OrderBy(p => p.Date))
                 {
                     model.Add(Transform(perf));
                 }

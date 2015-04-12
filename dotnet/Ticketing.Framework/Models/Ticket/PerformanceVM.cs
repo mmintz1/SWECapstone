@@ -19,5 +19,6 @@ namespace Ticketing.Framework.Models.Ticket
         public int Quantity { get; set; }
         public string EventName { get; set; }
         public string Location { get; set; }
+        public int LineNumber { get; set; }
     }
 }

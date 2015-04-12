@@ -626,7 +626,7 @@ aside .box { float:left;}
 .box.col45 { width:45%; float:left;}
 .box.col45:first-of-type { margin-right:10px; }
 
-.view { border:1px solid #000; text-decoration:none;}
+.view { border:1px solid #000; text-decoration:none; padding: 5px 15px; }
 
 .top-row { width:100%; text-align:right; }
 

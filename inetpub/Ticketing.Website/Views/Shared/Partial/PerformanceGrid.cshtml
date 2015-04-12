@@ -1,7 +1,9 @@
 ﻿@model Ticketing.Framework.Models.Ticket.PerformanceVM
 @{
     List<SelectListItem> selectQuantity = new List<SelectListItem>();
-    for (int i=1; i<9; i++)
+    var maxQuantity = Model.AvailableTickets < 9 ? Model.AvailableTickets : 8;
+    
+    for (int i=1; i<=maxQuantity; i++)
     {
         selectQuantity.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
     }
@@ -38,8 +40,14 @@
 
     
     <div class="column">
-        <p><input type="submit" id="submit" value="Add to Cart" /></p>
-        <p>Quantity @Html.DropDownListFor(p => Model.Quantity, selectQuantity)</p>
+        @if (Model.AvailableTickets > 0)
+        {
+            <p><input type="submit" id="submit" value="Add to Cart" /></p>
+            <p>Quantity @Html.DropDownListFor(p => Model.Quantity, selectQuantity)</p>
+        }
+        else {
+            <p><input type="button" value="Sold out" disabled="disabled" /></p>   
+        }
         @Html.HiddenFor(p => Model.PerformanceId)
         @Html.HiddenFor(p => Model.EventName)
         @Html.HiddenFor(p => Model.PerformanceDate)
