@@ -14,38 +14,53 @@ namespace Ticketing.Framework.Mediators
         {
             var success = false;
             var mediator = new TicketMediator();
+            var cart = mediator.GetCart();
 
-
-
-            using (var db = new ManagementToolProjectEntities())
+            foreach (var perf in cart.Performances)
             {
-                var date = payment.ExpirationMonth + "/1/" + payment.ExpirationYear;
-                var expiry = DateTime.Parse(date);
+                var performance = mediator.GetPerformance(perf.PerformanceId);
 
-                var orderModel = new Order
+                if (performance.AvailableTickets - perf.Quantity >= 0)
                 {
-                    FirstName = payment.FirstName,
-                    LastName = payment.LastName,
-                    BillingAdress = payment.BillingAddress.Address1,
-                    BillingCity = payment.BillingAddress.City,
-                    BillingState = payment.BillingAddress.State,
-                    BillingZipCode = Convert.ToInt32(payment.BillingAddress.Zip),
-                    ShippingAdress = payment.ShippingAddress.Address1,
-                    ShippingCity = payment.ShippingAddress.City,
-                    ShippingState = payment.ShippingAddress.State,
-                    ShippingZipCode = Convert.ToInt32(payment.ShippingAddress.Zip),
-                    ExpirationDate = expiry,
-                    CreditCard = payment.CreditCardNumber,
-                    status = 1
-                    
-                };
+                    success = true;
 
-                var order = db.Orders.Add(orderModel);
-                success = db.SaveChanges() > 0;
+                    if (!success)
+                        break;
+                }
+            }
 
-                if (success)
+            if (success)
+            {
+                using (var db = new ManagementToolProjectEntities())
                 {
-                    AddPerformanceOrder(order.OrderId);
+                    var date = payment.ExpirationMonth + "/1/" + payment.ExpirationYear;
+                    var expiry = DateTime.Parse(date);
+
+                    var orderModel = new Order
+                    {
+                        FirstName = payment.FirstName,
+                        LastName = payment.LastName,
+                        BillingAdress = payment.BillingAddress.Address1,
+                        BillingCity = payment.BillingAddress.City,
+                        BillingState = payment.BillingAddress.State,
+                        BillingZipCode = Convert.ToInt32(payment.BillingAddress.Zip),
+                        ShippingAdress = payment.ShippingAddress.Address1,
+                        ShippingCity = payment.ShippingAddress.City,
+                        ShippingState = payment.ShippingAddress.State,
+                        ShippingZipCode = Convert.ToInt32(payment.ShippingAddress.Zip),
+                        ExpirationDate = expiry,
+                        CreditCard = payment.CreditCardNumber,
+                        status = 1
+
+                    };
+
+                    var order = db.Orders.Add(orderModel);
+                    success = db.SaveChanges() > 0;
+
+                    if (success)
+                    {
+                        AddPerformanceOrder(order.OrderId);
+                    }
                 }
             }
 
@@ -54,8 +69,9 @@ namespace Ticketing.Framework.Mediators
 
         public void AddPerformanceOrder(int orderId)
         {
-            var meditaor = new TicketMediator();
-            var cart = meditaor.GetCart();
+            var success = false;
+            var mediator = new TicketMediator();
+            var cart = mediator.GetCart();
             using (var db = new ManagementToolProjectEntities())
             {
                 foreach (var perf in cart.Performances)
@@ -68,9 +84,17 @@ namespace Ticketing.Framework.Mediators
                     };
 
                     db.OrderPerformanceMapping2.Add(perfOrder);
-                    var success = db.SaveChanges();
+                    success = db.SaveChanges() > 0;
+
+                    if (success)
+                    {
+                        var performance = mediator.GetPerformance(perf.PerformanceId);
+                        performance.AvailableTickets = performance.AvailableTickets - perf.Quantity;
+                        success = mediator.UpdatePerformance(performance);
+                    }
                 }
             }
+
         }
     }
 }

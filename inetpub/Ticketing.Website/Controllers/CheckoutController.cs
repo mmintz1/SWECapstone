@@ -40,6 +40,10 @@ namespace Ticketing.Website.Controllers
         [HttpGet]
         public ActionResult Review()
         {
+            var mediator = new TicketMediator();
+            CartVM cart = mediator.GetCart();
+            if (cart.Performances == null || cart.Performances.Count == 0)
+                return Redirect("/checkout/cart");
             var model = new PaymentVM();
             model.SameAsBilling = true;
             return View("~/Views/Checkout/Review.cshtml", model);
