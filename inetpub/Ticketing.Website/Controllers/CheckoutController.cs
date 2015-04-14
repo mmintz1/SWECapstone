@@ -48,6 +48,23 @@ namespace Ticketing.Website.Controllers
         [HttpPost]
         public ActionResult Review(PaymentVM model)
         {
+            var oMediator = new OrderMediator();
+            var tMediator = new TicketMediator();
+            if (model.SameAsBilling)
+            {
+                model.ShippingAddress.Address1 = model.BillingAddress.Address1;
+                model.ShippingAddress.City = model.BillingAddress.City;
+                model.ShippingAddress.State = model.BillingAddress.State;
+                model.ShippingAddress.Zip = model.BillingAddress.Zip;
+            }
+            var success = oMediator.CreateOrder(model);
+
+            if (success)
+            {
+                tMediator.ClearCart();
+                return Redirect("/checkout/confirmation");
+            }
+
             return View("~/Views/Checkout/Review.cshtml", model);
         }
 

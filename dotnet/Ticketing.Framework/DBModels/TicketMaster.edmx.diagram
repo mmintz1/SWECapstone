@@ -16,6 +16,9 @@
         <AssociationConnector Association="ManagementToolProjectModel.FK_Events_Users" />
         <AssociationConnector Association="ManagementToolProjectModel.FK_Performances_Events" />
         <AssociationConnector Association="ManagementToolProjectModel.FK_Orders_Performances" />
+        <EntityTypeShape EntityType="ManagementToolProjectModel.OrderPerformanceMapping2" Width="1.5" PointX="8.5" PointY="7.375" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Orders" />
+        <AssociationConnector Association="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Performances" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

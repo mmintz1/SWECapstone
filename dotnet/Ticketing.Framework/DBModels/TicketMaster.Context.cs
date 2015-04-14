@@ -31,5 +31,6 @@ namespace Ticketing.Framework.DBModels
         public DbSet<Order> Orders { get; set; }
         public DbSet<Performance> Performances { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<OrderPerformanceMapping2> OrderPerformanceMapping2 { get; set; }
     }
 }

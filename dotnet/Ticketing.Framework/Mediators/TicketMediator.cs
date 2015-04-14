@@ -236,5 +236,22 @@ namespace Ticketing.Framework.Mediators
 
             return cart;
         }
+
+        public void ClearCart()
+        {
+            HttpContext.Current.Session["Cart"] = null;
+        }
+
+        public bool HasEnoughSeats(int performanceId, int quantity)
+        {
+            bool hasSeats = false;
+            var perf = GetPerformance(performanceId);
+
+            if (perf.AvailableTickets - quantity >= 0)
+                hasSeats = true;
+
+            return hasSeats;
+
+        }
     }
 }

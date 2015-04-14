@@ -46,7 +46,7 @@
             @Html.LabelFor(l => l.VerifyPassword, "Confirm Password")
         </div>
         <div class="editor-field">
-            @Html.PasswordFor(l => l.VerifyPassword, new { required = "", equalTo = "Password" })
+            @Html.PasswordFor(l => l.VerifyPassword, new { required = "", equalTo = "#Password" })
         </div>
         @Html.ValidationMessageFor(l => l.VerifyPassword)
 

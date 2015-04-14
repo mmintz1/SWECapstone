@@ -9,6 +9,7 @@
           <EntitySet Name="CardType" EntityType="ManagementToolProjectModel.Store.CardType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Events" EntityType="ManagementToolProjectModel.Store.Events" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="EventType" EntityType="ManagementToolProjectModel.Store.EventType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="OrderPerformanceMapping2" EntityType="ManagementToolProjectModel.Store.OrderPerformanceMapping2" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Orders" EntityType="ManagementToolProjectModel.Store.Orders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Performances" EntityType="ManagementToolProjectModel.Store.Performances" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Users" EntityType="ManagementToolProjectModel.Store.Users" store:Type="Tables" Schema="dbo" />
@@ -19,6 +20,14 @@
           <AssociationSet Name="FK_Events_Users" Association="ManagementToolProjectModel.Store.FK_Events_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPerformanceMapping2_Orders" Association="ManagementToolProjectModel.Store.FK_OrderPerformanceMapping2_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderPerformanceMapping2" EntitySet="OrderPerformanceMapping2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPerformanceMapping2_Performances" Association="ManagementToolProjectModel.Store.FK_OrderPerformanceMapping2_Performances">
+            <End Role="Performances" EntitySet="Performances" />
+            <End Role="OrderPerformanceMapping2" EntitySet="OrderPerformanceMapping2" />
           </AssociationSet>
           <AssociationSet Name="FK_Orders_CardType" Association="ManagementToolProjectModel.Store.FK_Orders_CardType">
             <End Role="CardType" EntitySet="CardType" />
@@ -63,6 +72,15 @@
           <Property Name="Type" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="status" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="OrderPerformanceMapping2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OderId" Type="int" Nullable="false" />
+          <Property Name="PerformanceId" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="OrderId" />
@@ -75,7 +93,7 @@
           <Property Name="ShippingCity" Type="varchar" MaxLength="100" />
           <Property Name="ShippingState" Type="varchar" MaxLength="100" />
           <Property Name="ShippingZipCode" Type="int" />
-          <Property Name="CreditCard" Type="int" />
+          <Property Name="CreditCard" Type="varchar" MaxLength="50" />
           <Property Name="CardTypeId" Type="int" />
           <Property Name="ExpirationDate" Type="date" />
           <Property Name="TicketNumber" Type="int" />
@@ -133,6 +151,30 @@
             </Principal>
             <Dependent Role="Events">
               <PropertyRef Name="CreateById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPerformanceMapping2_Orders">
+          <End Role="Orders" Type="ManagementToolProjectModel.Store.Orders" Multiplicity="1" />
+          <End Role="OrderPerformanceMapping2" Type="ManagementToolProjectModel.Store.OrderPerformanceMapping2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderPerformanceMapping2">
+              <PropertyRef Name="OderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPerformanceMapping2_Performances">
+          <End Role="Performances" Type="ManagementToolProjectModel.Store.Performances" Multiplicity="1" />
+          <End Role="OrderPerformanceMapping2" Type="ManagementToolProjectModel.Store.OrderPerformanceMapping2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performances">
+              <PropertyRef Name="PerformanceId" />
+            </Principal>
+            <Dependent Role="OrderPerformanceMapping2">
+              <PropertyRef Name="PerformanceId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -209,6 +251,15 @@
             <End Role="Performance" EntitySet="Performances" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <EntitySet Name="OrderPerformanceMapping2" EntityType="ManagementToolProjectModel.OrderPerformanceMapping2" />
+          <AssociationSet Name="FK_OrderPerformanceMapping2_Orders" Association="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Orders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderPerformanceMapping2" EntitySet="OrderPerformanceMapping2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPerformanceMapping2_Performances" Association="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Performances">
+            <End Role="Performance" EntitySet="Performances" />
+            <End Role="OrderPerformanceMapping2" EntitySet="OrderPerformanceMapping2" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="CardType">
           <Key>
@@ -257,7 +308,7 @@
           <Property Name="ShippingCity" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="ShippingState" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="ShippingZipCode" Type="Int32" />
-          <Property Name="CreditCard" Type="Int32" />
+          <Property Name="CreditCard" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="CardTypeId" Type="Int32" />
           <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
           <Property Name="TicketNumber" Type="Int32" />
@@ -268,6 +319,7 @@
           <Property Name="status" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CardType" Relationship="ManagementToolProjectModel.FK_Orders_CardType" FromRole="Order" ToRole="CardType" />
           <NavigationProperty Name="Performance" Relationship="ManagementToolProjectModel.FK_Orders_Performances" FromRole="Order" ToRole="Performance" />
+          <NavigationProperty Name="OrderPerformanceMapping2" Relationship="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Orders" FromRole="Order" ToRole="OrderPerformanceMapping2" />
         </EntityType>
         <EntityType Name="Performance">
           <Key>
@@ -282,6 +334,7 @@
           <Property Type="String" Name="EventName" MaxLength="125" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Event" Relationship="ManagementToolProjectModel.FK_Performances_Events" FromRole="Performance" ToRole="Event" />
           <NavigationProperty Name="Orders" Relationship="ManagementToolProjectModel.FK_Orders_Performances" FromRole="Performance" ToRole="Order" />
+          <NavigationProperty Name="OrderPerformanceMapping2" Relationship="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Performances" FromRole="Performance" ToRole="OrderPerformanceMapping2" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -361,6 +414,41 @@
               <PropertyRef Name="PerformanceId" />
             </Principal>
             <Dependent Role="Order">
+              <PropertyRef Name="PerformanceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderPerformanceMapping2">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="OderId" Nullable="false" />
+          <Property Type="Int32" Name="PerformanceId" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" />
+          <NavigationProperty Name="Order" Relationship="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Orders" FromRole="OrderPerformanceMapping2" ToRole="Order" />
+          <NavigationProperty Name="Performance" Relationship="ManagementToolProjectModel.FK_OrderPerformanceMapping2_Performances" FromRole="OrderPerformanceMapping2" ToRole="Performance" />
+        </EntityType>
+        <Association Name="FK_OrderPerformanceMapping2_Orders">
+          <End Type="ManagementToolProjectModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="ManagementToolProjectModel.OrderPerformanceMapping2" Role="OrderPerformanceMapping2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Principal>
+            <Dependent Role="OrderPerformanceMapping2">
+              <PropertyRef Name="OderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPerformanceMapping2_Performances">
+          <End Type="ManagementToolProjectModel.Performance" Role="Performance" Multiplicity="1" />
+          <End Type="ManagementToolProjectModel.OrderPerformanceMapping2" Role="OrderPerformanceMapping2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Performance">
+              <PropertyRef Name="PerformanceId" />
+            </Principal>
+            <Dependent Role="OrderPerformanceMapping2">
               <PropertyRef Name="PerformanceId" />
             </Dependent>
           </ReferentialConstraint>
@@ -449,6 +537,16 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPerformanceMapping2">
+            <EntityTypeMapping TypeName="ManagementToolProjectModel.OrderPerformanceMapping2">
+              <MappingFragment StoreEntitySet="OrderPerformanceMapping2">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PerformanceId" ColumnName="PerformanceId" />
+                <ScalarProperty Name="OderId" ColumnName="OderId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

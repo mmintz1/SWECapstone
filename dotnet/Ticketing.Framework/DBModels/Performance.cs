@@ -17,6 +17,7 @@ namespace Ticketing.Framework.DBModels
         public Performance()
         {
             this.Orders = new HashSet<Order>();
+            this.OrderPerformanceMapping2 = new HashSet<OrderPerformanceMapping2>();
         }
     
         public int PerformanceId { get; set; }
@@ -29,5 +30,6 @@ namespace Ticketing.Framework.DBModels
     
         public virtual Event Event { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<OrderPerformanceMapping2> OrderPerformanceMapping2 { get; set; }
     }
 }

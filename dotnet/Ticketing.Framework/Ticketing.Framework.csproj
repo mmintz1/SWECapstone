@@ -79,6 +79,9 @@
     <Compile Include="DBModels\Order.cs">
       <DependentUpon>TicketMaster.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModels\OrderPerformanceMapping2.cs">
+      <DependentUpon>TicketMaster.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModels\Performance.cs">
       <DependentUpon>TicketMaster.tt</DependentUpon>
     </Compile>

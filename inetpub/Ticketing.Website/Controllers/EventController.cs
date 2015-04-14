@@ -60,7 +60,7 @@ namespace Ticketing.Website.Controllers
             return View(events);
         }
 
-        public ActionResult AddToCart(PerformanceVM model, int PerformanceId)
+        public ActionResult AddToCart(PerformanceVM model)
         {
             var mediator = new TicketMediator();
             CartVM cart = mediator.GetCart();

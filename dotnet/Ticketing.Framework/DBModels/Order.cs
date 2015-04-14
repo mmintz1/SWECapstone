@@ -14,6 +14,11 @@ namespace Ticketing.Framework.DBModels
     
     public partial class Order
     {
+        public Order()
+        {
+            this.OrderPerformanceMapping2 = new HashSet<OrderPerformanceMapping2>();
+        }
+    
         public int OrderId { get; set; }
         public Nullable<int> PerformanceId { get; set; }
         public string FirstName { get; set; }
@@ -22,7 +27,7 @@ namespace Ticketing.Framework.DBModels
         public string ShippingCity { get; set; }
         public string ShippingState { get; set; }
         public Nullable<int> ShippingZipCode { get; set; }
-        public Nullable<int> CreditCard { get; set; }
+        public string CreditCard { get; set; }
         public Nullable<int> CardTypeId { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }
         public Nullable<int> TicketNumber { get; set; }
@@ -34,5 +39,6 @@ namespace Ticketing.Framework.DBModels
     
         public virtual CardType CardType { get; set; }
         public virtual Performance Performance { get; set; }
+        public virtual ICollection<OrderPerformanceMapping2> OrderPerformanceMapping2 { get; set; }
     }
 }
