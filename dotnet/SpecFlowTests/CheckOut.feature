@@ -6,8 +6,6 @@
 @mytag
 Scenario: The user and the system confirms the order
 	Given That there are items in the shopping cart
-	When The User confirms the order
-	And The User inputs the billing information
-	And The System confirms the order
+	When The User inputs the billing information and confirms the order
 	Then The System updates the inventory
 	And The System displays order confirmation

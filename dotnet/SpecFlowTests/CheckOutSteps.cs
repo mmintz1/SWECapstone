@@ -1,5 +1,10 @@
 ﻿using System;
 using TechTalk.SpecFlow;
+using Ticketing.Framework.DBModels;
+using Ticketing.Framework.Mediators;
+using Ticketing.Framework.Models.Cart;
+using Ticketing.Framework.Models.Ticket;
+using Ticketing.Website.Controllers;
 
 namespace SpecFlowTests
 {
@@ -7,39 +12,59 @@ namespace SpecFlowTests
     public class CheckOutSteps
     {
         [Given(@"That there are items in the shopping cart")]
-public void GivenThatThereAreItemsInTheShoppingCart()
-{
-    ScenarioContext.Current.Pending();
-}
+        public void GivenThatThereAreItemsInTheShoppingCart()
+        {
+            var performance = new PerformanceVM
+            {
+                AvailableTickets = 1,
+                Cancelled = false,
+                EventId = 1,
+                EventName = "TestEvent",
+                LineNumber = 0,
+                Location = null,
+                PerformanceDate = "04/23/15",
+                PerformanceId = 8,
+                Price = 0,
+                Quantity = 1
+            };
+            new EventController().AddToCart(performance);
+        }
 
-        [When(@"The User confirms the order")]
-public void WhenTheUserConfirmsTheOrder()
-{
-    ScenarioContext.Current.Pending();
-}
+        [When(@"The User inputs the billing information and confirms the order")]
+        public void WhenTheUserConfirmsTheOrder()
+        {
+            var payment = new PaymentVM
+            {
 
-        [When(@"The User inputs the billing information")]
-public void WhenTheUserInputsTheBillingInformation()
-{
-    ScenarioContext.Current.Pending();
-}
-
-        [When(@"The System confirms the order")]
-public void WhenTheSystemConfirmsTheOrder()
-{
-    ScenarioContext.Current.Pending();
-}
+            };
+            new OrderMediator().CreateOrder(payment);
+        }
 
         [Then(@"The System updates the inventory")]
-public void ThenTheSystemUpdatesTheInventory()
-{
-    ScenarioContext.Current.Pending();
-}
+        public void ThenTheSystemUpdatesTheInventory()
+        {
+            var performance = new PerformanceVM
+            {
+                AvailableTickets = 1,
+                Cancelled = false,
+                EventId = 1,
+                EventName = "TestEvent",
+                LineNumber = 0,
+                Location = null,
+                PerformanceDate = "04/23/15",
+                PerformanceId = 8,
+                Price = 0,
+                Quantity = 1
+            };
+            new TicketMediator().UpdatePerformance(performance);
+        }
 
         [Then(@"The System displays order confirmation")]
-public void ThenTheSystemDisplaysOrderConfirmation()
-{
-    ScenarioContext.Current.Pending();
-}
+        public void ThenTheSystemDisplaysOrderConfirmation()
+        {
+            //confirmation => CheckoutController
+            //new CheckoutController().confirmation();
+            ScenarioContext.Current.Pending();
+        }
     }
 }
