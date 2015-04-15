@@ -1,7 +1,6 @@
 ﻿Feature: CheckOut
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+	In order to check that the user
+	can submit order
 
 @mytag
 Scenario: The user and the system confirms the order
