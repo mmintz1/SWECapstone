@@ -94,5 +94,48 @@ namespace SpecFlowTests
             //new CheckoutController().confirmation();
             ScenarioContext.Current.Pending();
         }
+
+        [When(@"The User inputs the billing information and clicks cancel")]
+        public void WhenTheUserCancelsTheOrder()
+        {
+            var payment = new PaymentVM
+            {
+                BillingAddress = new Address
+                {
+                    Address1 = "Address line 1",
+                    Address2 = "Address line 2",
+                    City = "City",
+                    Country = null,
+                    State = "State",
+                    Zip = "30345"
+                },
+                CreditCardNumber = "0000111122223333",
+                CreditCardType = "Visa",
+                CVV = "888",
+                Email = "Spec.Flow@specflow.com",
+                ExpirationMonth = "1",
+                ExpirationYear = "2015",
+                FirstName = "SpecFlow",
+                LastName = "FlowSpec",
+                NameOnCard = "Name",
+                SameAsBilling = true,
+                ShippingAddress = new Address
+                {
+                    Address1 = "Address line 1",
+                    Address2 = "Address line 2",
+                    City = "City",
+                    Country = null,
+                    State = "State",
+                    Zip = "30345"
+                }
+            };
+            //new OrderMediator().CancelOrder();
+        }
+
+        [Then(@"The System does not update the inventory")]
+        public void ThenTheSystemDoesNotUpdateInventory()
+        {
+            //new CheckoutController().confirmation();
+        }
     }
 }
