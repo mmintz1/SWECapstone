@@ -5,7 +5,7 @@
 }
 
 <hgroup class="title">
-    <h1>Performance List</h1>
+    <h1>@Model.Name Performance List</h1>
     @Html.ActionLink("Create Performance", "CreatePerformance", new { controller = "Admin", id = Model.Id }) |
     @Html.ActionLink("Event List", "EventList", new { controller = "Admin", id = Model.Id })
 </hgroup>
@@ -13,9 +13,6 @@
 
 <table>
     <tr>
-        <th>
-            Event Name
-        </th>
         <th>
             Event Date
         </th>
@@ -32,9 +29,6 @@
 
 @foreach (var item in Model.Performances) {
     <tr>
-        <td>
-            Test
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.PerformanceDate)
         </td>

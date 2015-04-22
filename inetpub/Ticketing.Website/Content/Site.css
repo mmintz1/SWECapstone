@@ -646,3 +646,11 @@ aside .box { float:left;}
 .hideme { display:none !important; }
 
 .dropdown { width:auto; }
+
+.header-bar { float:left; width:100%; border-bottom:2px solid #e5e5e5; border-top:2px solid #e5e5e5;}
+.header-bar h3 { margin:9px 0 11px; }
+.body-sect .col20 { float:left; width:20%; }
+.sgl-item { float:left; width:100%; padding:20px 0; }
+.sgl-item p { float:left; width:100%; }
+
+.banner { width:100%; height:250px; }

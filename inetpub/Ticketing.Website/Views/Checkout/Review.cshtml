@@ -28,7 +28,7 @@
 }
 
 <hgroup class="title">
-    <h1>Review</h1>
+    <h1>Checkout</h1>
 </hgroup>
 
 @using (Html.BeginForm("Review", "Checkout", FormMethod.Post, new { @class = "management-form" }))
@@ -114,6 +114,7 @@
             </div>
             
             <p>
+                @Html.ActionLink("Cancel", "Cart", new { controller = "Checkout" })
                 <input type="submit" value="submit" />
             </p>
         </div>

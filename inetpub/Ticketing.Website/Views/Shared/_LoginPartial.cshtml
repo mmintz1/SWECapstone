@@ -1,4 +1,7 @@
 ﻿<ul>
+    @if (User.Identity.IsAuthenticated){
+    <li><a href="/admin/eventlist">Event List</a></li>
+    }
     <li><a href="/account/register">Register</a></li>
     @if (User.Identity.IsAuthenticated){
         <li>@Html.ActionLink("Log Off", "Logout", "Account")</li>

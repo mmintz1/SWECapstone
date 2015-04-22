@@ -73,7 +73,7 @@ namespace Ticketing.Framework.Mediators
                     Description = model.Description,
                     Location = model.Location,
                     Image = model.Image,
-                    status = 0,
+                    status = Convert.ToInt32(model.Active),
                     EventTypeId = model.Category
                 };
 
@@ -96,6 +96,7 @@ namespace Ticketing.Framework.Mediators
                 dbEvent.Image = model.Image;
                 dbEvent.Location = model.Location;
                 dbEvent.Name = model.Name;
+                dbEvent.status = Convert.ToInt32(model.Active);
 
                 resp.Update(dbEvent);
                 success = db.SaveChanges() > 0;

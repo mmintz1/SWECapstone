@@ -28,7 +28,7 @@ namespace Ticketing.Website.Controllers
             var success = mediator.UpdateEvent(model);
 
             if (success)
-                return Redirect("/");
+                return Redirect("/admin/eventlist");
             else
             {
                 ViewBag.PageTitle = "Edit Event";
@@ -64,7 +64,7 @@ namespace Ticketing.Website.Controllers
             var success = mediator.CreateEvent(model);
 
             if (success)
-                return Redirect("/");
+                return Redirect("/admin/eventlist");
             else
             {
                 ViewBag.PageTitle = "Create Event";

@@ -18,7 +18,7 @@
     <div class="column">
         <p><b>@Model.EventName</b></p>
         <p>@Model.PerformanceDate</p>
-        <p>Location</p>
+        <p>@Model.Location</p>
     </div>
     <div class="column">
         @if (Model.Cancelled)
@@ -53,6 +53,7 @@
         @Html.HiddenFor(p => Model.PerformanceDate)
         @Html.HiddenFor(p => Model.Price)
         @Html.HiddenFor(p => Model.EventId)
+        @Html.HiddenFor(p => Model.Location)
     </div>
     }
 </div>

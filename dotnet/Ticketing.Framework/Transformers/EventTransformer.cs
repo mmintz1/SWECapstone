@@ -20,7 +20,7 @@ namespace Ticketing.Framework.Transformers
                 Image = ev.Image,
                 Location = ev.Location,
                 Name = ev.Name,
-                Active = ev.status == 0 ? false : true,
+                Active = Convert.ToBoolean(ev.status),
                 Performances = new List<PerformanceVM>()
             };
 

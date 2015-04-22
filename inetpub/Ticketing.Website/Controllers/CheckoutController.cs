@@ -65,7 +65,7 @@ namespace Ticketing.Website.Controllers
 
             if (success)
             {
-                tMediator.ClearCart();
+                //tMediator.ClearCart();
                 return Redirect("/checkout/confirmation");
             }
 
@@ -86,6 +86,14 @@ namespace Ticketing.Website.Controllers
                 i++;
             }
             return Redirect("/checkout/cart");
+        }
+
+        public ActionResult Confirmation()
+        {
+            var mediator = new TicketMediator();
+            CartVM cart = mediator.GetCart();
+            mediator.ClearCart();
+            return View(cart);
         }
     }
 }

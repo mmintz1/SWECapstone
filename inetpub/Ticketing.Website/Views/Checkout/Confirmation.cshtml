@@ -1,6 +1,55 @@
-﻿@{
+﻿@model Ticketing.Framework.Models.Cart.CartVM
+@{
     ViewBag.Title = "Confirmation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Confirmation</h2>
+
+<p>Thank you for your purchase.</p>
+
+<div class="body-sect">
+    <div class="header-bar">
+        <div class="col20">
+            <h3>Event</h3>
+        </div>
+        <div class="col20">
+            <h3>Date</h3>
+        </div>
+        <div class="col20">
+            <h3>Location</h3>
+        </div>
+        <div class="col20">
+            <h3>Quantity</h3>
+        </div>
+        <div class="col20">
+            <h3>Price</h3>
+        </div>
+    </div>
+    <div class="mid-sect">
+        @foreach (var perf in Model.Performances)
+        {
+        <div class="sgl-item">
+            <div class="col20 show-for-medium-up">
+                <p>@perf.EventName</p>
+            </div>
+              
+            <div class="col20 show-for-medium-up">
+                <p>@perf.PerformanceDate</p>
+            </div>
+              
+            <div class="col20 show-for-medium-up">
+                <p>@perf.Location</p>
+            </div>
+              
+            <div class="col20 show-for-medium-up">
+                <p>@perf.Quantity</p>  
+            </div>
+              
+            <div class="col20 show-for-medium-up">
+                <p>@perf.Price.ToString("C")</p>
+            </div>
+        </div>
+        }
+    </div>
+</div>
