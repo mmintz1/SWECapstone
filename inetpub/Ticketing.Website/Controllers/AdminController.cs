@@ -54,6 +54,7 @@ namespace Ticketing.Website.Controllers
 
             var mediator = new TicketMediator();
             model.Categories = mediator.GetEventTypes();
+            model.Active = true;
             return View("~/Views/Admin/EventForm.cshtml", model);
         }
 

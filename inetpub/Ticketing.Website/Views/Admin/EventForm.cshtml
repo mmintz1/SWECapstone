@@ -26,12 +26,12 @@
             @Html.TextBoxFor(l => l.Location, new { required = "" })
         </div>            
         @Html.ValidationMessageFor(l => l.Location)
-        <div class="editor-label">
+        @*<div class="editor-label">
             @Html.LabelFor(l => l.Image, "Image")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Image)
-        </div>
+        </div>*@
         <div class="editor-label">
             @Html.LabelFor(l => l.Description, "Description")
         </div>
@@ -44,6 +44,12 @@
         </div>
         <div class="editor-field">
             @Html.DropDownListFor(l => l.Category, new SelectList(Model.Categories, "CategoryId", "Name"), new { required = "", @class = "dropdown" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(l => l.Active, "Active")
+        </div>
+        <div class="editor-field">
+            @Html.CheckBoxFor(l => l.Active)
         </div>
 
         <p>
