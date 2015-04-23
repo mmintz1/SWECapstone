@@ -8,6 +8,7 @@ using Ticketing.Framework.Models.Ticket;
 
 namespace Ticketing.Website.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         [HttpGet]

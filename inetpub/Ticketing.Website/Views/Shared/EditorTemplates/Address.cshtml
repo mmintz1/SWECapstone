@@ -1,11 +1,11 @@
 ﻿@model Ticketing.Framework.BusinessModels.Address
 @{
-    ViewBag.Title = "Address";
+    
 }
 
 <div class="row">
     <div class="editor-label">
-        @Html.LabelFor(l => l.Address1, "Address")
+        @Html.LabelFor(l => l.Address1, "Address*")
         @Html.TextBoxFor(l => l.Address1, new { required = "" })
         @Html.ValidationMessageFor(l => l.Address1)
     </div>
@@ -18,17 +18,17 @@
 </div>
 <div class="row">
     <div class="col">
-        @Html.LabelFor(l => l.City, "City")
+        @Html.LabelFor(l => l.City, "City*")
         @Html.TextBoxFor(l => l.City, new { required = "" })
         @Html.ValidationMessageFor(l => l.City)
     </div>
     <div class="col">
-        @Html.LabelFor(l => l.State, "State")
+        @Html.LabelFor(l => l.State, "State*")
         @Html.TextBoxFor(l => l.State, new { required = "" })
         @Html.ValidationMessageFor(l => l.State)
     </div>
     <div class="col">
-        @Html.LabelFor(l => l.Zip, "Zip")
+        @Html.LabelFor(l => l.Zip, "Zip*")
         @Html.TextBoxFor(l => l.Zip, new { required = "", @maxlength = 5, digits = true, @class = "zip" })
         @Html.ValidationMessageFor(l => l.Zip)
     </div>

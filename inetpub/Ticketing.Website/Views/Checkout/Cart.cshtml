@@ -8,7 +8,8 @@
     <h1>Cart</h1>
 </hgroup>
 <div class="top-row">
-    @Html.ActionLink("Checkout", "Review", new { controller = "Checkout" }, new { @class = "view" })
+    @Html.ActionLink("Continue Shopping", "BuyTickets", new { controller = "Event" }, new { @class = "button" })
+    @Html.ActionLink("Checkout", "Review", new { controller = "Checkout" }, new { @class = "view back" })
 </div>
 @if (Model.Performances == null || Model.Performances.Count == 0) {
     <div class="box">

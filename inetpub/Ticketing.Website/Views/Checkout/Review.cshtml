@@ -39,19 +39,19 @@
         <div class="review">
             <div class="row">
                 <div class="col">
-                    @Html.LabelFor(l => l.FirstName, "First Name")
+                    @Html.LabelFor(l => l.FirstName, "First Name*")
                     @Html.TextBoxFor(l => l.FirstName, new { required = "" })
                     @Html.ValidationMessageFor(l => l.FirstName)
                 </div>
                 <div class="col">
-                    @Html.LabelFor(l => l.LastName, "Last Name")
+                    @Html.LabelFor(l => l.LastName, "Last Name*")
                     @Html.TextBoxFor(l => l.LastName, new { required = "" })
                     @Html.ValidationMessageFor(l => l.LastName)
                 </div>
             </div>
             <div class="row">
                 <div class="editor-label">
-                    @Html.LabelFor(l => l.Email, "Email")
+                    @Html.LabelFor(l => l.Email, "Email*")
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.Email, new { required = "", type = "email" })
@@ -74,7 +74,7 @@
             </div>
             <div class="row">
                 <div class="editor-label">
-                    @Html.LabelFor(l => l.CreditCardType, "Card Type")
+                    @Html.LabelFor(l => l.CreditCardType, "Card Type*")
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.CreditCardType, new { required = "" })
@@ -83,7 +83,7 @@
             </div>
             <div class="row">
                 <div class="editor-label">
-                    @Html.LabelFor(l => l.NameOnCard, "Name On Card")
+                    @Html.LabelFor(l => l.NameOnCard, "Name On Card*")
                 </div>
                 <div class="editor-field">
                     @Html.TextBoxFor(l => l.NameOnCard, new { required = "" })
@@ -92,12 +92,12 @@
             </div>
             <div class="row">
                 <div class="col">
-                    @Html.LabelFor(l => l.CreditCardNumber, "Card Number")
+                    @Html.LabelFor(l => l.CreditCardNumber, "Card Number*")
                     @Html.TextBoxFor(l => l.CreditCardNumber, new { required = "", creditcard = true, digits = true })
                     @Html.ValidationMessageFor(l => l.CreditCardNumber)
                 </div>
                 <div class="col">
-                    @Html.LabelFor(l => l.CVV, "Security Code")
+                    @Html.LabelFor(l => l.CVV, "Security Code*")
                     @Html.TextBoxFor(l => l.CVV, new { required = "", @class = "zip", digits = true })
                     @Html.ValidationMessageFor(l => l.CVV)
                 </div>

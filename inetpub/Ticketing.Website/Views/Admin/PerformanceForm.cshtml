@@ -13,21 +13,21 @@
         <legend>Create/Edit Performance</legend>
         @Html.ValidationMessage("ErrorMessage")
         <div class="editor-label">
-            @Html.LabelFor(l => l.PerformanceDate, "Performance Date")
+            @Html.LabelFor(l => l.PerformanceDate, "Performance Date*")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.PerformanceDate, new { required = "" })
         </div>
         @Html.ValidationMessageFor(l => l.PerformanceDate)
         <div class="editor-label">
-            @Html.LabelFor(l => l.AvailableTickets, "Available Seats")
+            @Html.LabelFor(l => l.AvailableTickets, "Available Seats*")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.AvailableTickets, new { required = "", min = 0, digits = true })
         </div>            
         @Html.ValidationMessageFor(l => l.AvailableTickets)
         <div class="editor-label">
-            @Html.LabelFor(l => l.Price, "Price")
+            @Html.LabelFor(l => l.Price, "Price*")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Price, new { required = "", @min = 0, digits = true })

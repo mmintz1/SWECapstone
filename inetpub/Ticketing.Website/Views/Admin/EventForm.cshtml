@@ -13,14 +13,14 @@
         <legend>Create/Edit Event</legend>
         @Html.ValidationMessage("ErrorMessage")
         <div class="editor-label">
-            @Html.LabelFor(l => l.Name, "Event Name")
+            @Html.LabelFor(l => l.Name, "Event Name*")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Name, new { required = "" })
         </div>
         @Html.ValidationMessageFor(l => l.Name)
         <div class="editor-label">
-            @Html.LabelFor(l => l.Location, "Location")
+            @Html.LabelFor(l => l.Location, "Location*")
         </div>
         <div class="editor-field">
             @Html.TextBoxFor(l => l.Location, new { required = "" })
@@ -33,7 +33,7 @@
             @Html.TextBoxFor(l => l.Image)
         </div>*@
         <div class="editor-label">
-            @Html.LabelFor(l => l.Description, "Description")
+            @Html.LabelFor(l => l.Description, "Description*")
         </div>
         <div class="editor-field">
             @Html.TextAreaFor(l => l.Description, new { required = true })
