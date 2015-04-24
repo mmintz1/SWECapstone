@@ -456,6 +456,7 @@ button, .back, a.button {
     width: auto;
     color:#fff;
     border-radius:6px;
+    text-decoration:none;
 }
 
 td input[type="submit"],
@@ -658,3 +659,9 @@ aside .box { float:left;}
 
 .banner { width:100%; height:250px; background:url('/Images/home_banner.jpg'); }
 .banner .text { text-align:center; padding-top:110px; font-size:30px; color:#fff; }
+
+.footer-row { width:100%; }
+.total-row { text-align:right; }
+
+.cardType { width:auto; }
+.col .creditcard { width:150px; }

@@ -22,11 +22,14 @@ namespace Ticketing.Website.Controllers
             var mediator = new TicketMediator();
             CartVM model = mediator.GetCart();
             int i = 0;
+            decimal total = 0;
             foreach (var perf in model.Performances)
             {
                 perf.LineNumber = i;
                 i++;
+                total += (perf.Quantity * perf.Price);
             }
+            model.Total = total;
 
             return View(model);
         }
@@ -93,6 +96,13 @@ namespace Ticketing.Website.Controllers
             var mediator = new TicketMediator();
             CartVM cart = mediator.GetCart();
             mediator.ClearCart();
+
+            decimal total = 0;
+            foreach (var perf in cart.Performances)
+            {
+                total += (perf.Quantity * perf.Price);
+            }
+            cart.Total = total;
             return View(cart);
         }
     }

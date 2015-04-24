@@ -30,6 +30,21 @@ namespace Ticketing.Framework.Mediators
             return events;
         }
 
+        public List<EventVM> GetActiveEvents()
+        {
+            var events = new List<EventVM>();
+            using (var db = new ManagementToolProjectEntities())
+            {
+                var resp = new EventRepository(db);
+                IEnumerable<Event> dbEvents = resp.Get(e => e.status == 1);
+
+                var transformer = new EventTransformer();
+                events = transformer.Transform(dbEvents);
+            }
+
+            return events;
+        }
+
         public List<EventItem> GetEventItems()
         {
             List<EventVM> events = GetEvents();
@@ -139,7 +154,7 @@ namespace Ticketing.Framework.Mediators
             using (var db = new ManagementToolProjectEntities())
             {
                 var resp = new PerformanceRepository(db);
-                var perfs = resp.Get(p => p.Date > DateTime.Now);
+                var perfs = resp.Get(p => p.Date > DateTime.Now && p.Event.status == 1);
 
                 var transformer = new PerformanceTransformer();
                 performances = transformer.Transform(perfs);
@@ -153,7 +168,7 @@ namespace Ticketing.Framework.Mediators
             using (var db = new ManagementToolProjectEntities())
             {
                 var resp = new PerformanceRepository(db);
-                var perfs = resp.Get(p => p.Date > DateTime.Now).Take(5).OrderBy(o => o.Date);
+                var perfs = resp.Get(p => p.Date > DateTime.Now && p.Event.status == 1).Take(5).OrderBy(o => o.Date);
 
                 var transformer = new PerformanceTransformer();
                 performances = transformer.Transform(perfs);

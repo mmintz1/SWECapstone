@@ -56,7 +56,7 @@ namespace Ticketing.Website.Controllers
         public ActionResult EventList()
         {
             var mediator = new TicketMediator();
-            List<EventVM> events = mediator.GetEvents();
+            List<EventVM> events = mediator.GetActiveEvents();
             return View(events);
         }
 

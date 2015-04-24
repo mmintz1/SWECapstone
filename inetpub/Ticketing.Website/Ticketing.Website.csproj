@@ -140,6 +140,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -252,6 +253,7 @@
     <Content Include="Views\Event\EventDetails.cshtml" />
     <Content Include="Views\Event\EventList.cshtml" />
     <Content Include="Views\Shared\Partial\PerformanceGrid.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
