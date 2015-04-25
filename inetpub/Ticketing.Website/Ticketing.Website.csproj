@@ -254,6 +254,7 @@
     <Content Include="Views\Event\EventList.cshtml" />
     <Content Include="Views\Shared\Partial\PerformanceGrid.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Shared\AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

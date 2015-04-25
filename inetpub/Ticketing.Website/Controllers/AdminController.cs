@@ -11,6 +11,13 @@ namespace Ticketing.Website.Controllers
     [Authorize]
     public class AdminController : Controller
     {
+        public ActionResult Index()
+        {
+            if (Request.IsAuthenticated)
+                return Redirect("/Admin/Eventlist");
+            return Redirect("/Account/login");
+        }
+
         [HttpGet]
         public ActionResult EditEvent(int id)
         {

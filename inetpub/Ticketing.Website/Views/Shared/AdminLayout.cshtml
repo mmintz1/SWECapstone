@@ -15,6 +15,9 @@
                 <p class="site-title"><a href="/"><img src="/Images/ABMZ_logo2.png" alt="Logo" /></a></p>
             </div>
             <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
                 <nav>
                     <ul id="menu">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
