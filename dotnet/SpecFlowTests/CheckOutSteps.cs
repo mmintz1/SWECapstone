@@ -91,7 +91,7 @@ namespace SpecFlowTests
         public void ThenTheSystemDisplaysOrderConfirmation()
         {
             //confirmation => CheckoutController
-            //new CheckoutController().confirmation();
+            new CheckoutController().Confirmation();
             ScenarioContext.Current.Pending();
         }
 
@@ -135,7 +135,7 @@ namespace SpecFlowTests
         [Then(@"The System does not update the inventory")]
         public void ThenTheSystemDoesNotUpdateInventory()
         {
-            //new CheckoutController().confirmation();
+            new CheckoutController().Confirmation();
         }
     }
 }

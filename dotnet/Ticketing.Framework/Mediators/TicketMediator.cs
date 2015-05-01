@@ -168,7 +168,7 @@ namespace Ticketing.Framework.Mediators
             using (var db = new ManagementToolProjectEntities())
             {
                 var resp = new PerformanceRepository(db);
-                var perfs = resp.Get(p => p.Date > DateTime.Now && p.Event.status == 1).Take(5).OrderBy(o => o.Date);
+                var perfs = resp.Get(p => p.Date > DateTime.Now && p.Event.status == 1).OrderBy(o => o.Date).Take(5);
 
                 var transformer = new PerformanceTransformer();
                 performances = transformer.Transform(perfs);

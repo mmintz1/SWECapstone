@@ -88,7 +88,7 @@ namespace Ticketing.Website.Controllers
                 perfs = perfs.Where(p => selectedEventType.Contains(p.EventId)).ToList();
 
             if (selectedCategoryType.Count() > 0 && (perfs != null && perfs.Count > 0))
-                perfs = perfs.Where(p => selectedEventType.Contains(p.EventId)).ToList();
+                perfs = perfs.Where(p => selectedCategoryType.Contains(p.EventId)).ToList();
 
 
             model.Performances = perfs;
